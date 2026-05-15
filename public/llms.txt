@@ -1,4 +1,4 @@
-# Vaibhav Kapoor — Applied AI Engineer
+# VK - Applied AI Engineer
 
 > Portfolio for Applied AI Engineering, AI Solutions Architecture, and Engineering leadership roles. Fifteen shipped projects across SaaS, AI agents, educational AI, dashboards, and mobile.
 

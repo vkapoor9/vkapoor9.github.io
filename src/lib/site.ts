@@ -1,8 +1,8 @@
 // Personal info — replace placeholders before deploying.
 
 export const site = {
-  name: 'Vaibhav Kapoor',
-  shortName: 'VK Kapoor',
+  name: 'VK',
+  shortName: 'VK',
   initials: 'VK',
   role: 'Applied AI Engineer · AI Solutions Architect',
   tagline:
