@@ -9,6 +9,7 @@
 - [KidsAI Buddy](/projects/kidsai-buddy): Kid-safe educational AI used daily by seven kids. Local Ollama, local Kokoro TTS, four-layer safety pipeline, gamification, parent admin.
 - [Jarvis Mac](/projects/jarvis-mac): Fully local voice assistant on Apple Silicon. mlx-lm Gemma 3.1, speculative decoding, per-session prompt cache, acoustic pronunciation learning, on-device RAG.
 - [Mission Control](/projects/mission-control): Homelab dashboard that watches 50 projects and writes daily LLM-summarized pulses. Tier 2 observability, 4 launchd agents, Telegram delivery.
+- [Lead Engine](/projects/lead-engine): End-to-end lead pipeline. FastAPI + SQLite dashboard, Claude-powered website audits, Resend cold outreach with per-lead preview redesigns, Telegram engagement alerts, scheduled LaunchAgent follow-ups.
 - [Prerna Kapoor](/projects/prerna-kapoor): Full WordPress site for a Colorado realtor with three Claude-powered AI workflows: a site chatbot, a backend listing-creation bot, and a scheduled autopublishing blog pipeline. Bilingual (EN / JP). Paid client.
 
 ## Other work

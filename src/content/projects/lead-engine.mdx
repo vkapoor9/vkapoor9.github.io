@@ -1,0 +1,55 @@
+---
+title: "Lead Engine"
+tagline: "End-to-end lead pipeline: prospect, audit, generate a preview redesign, send a personalized cold email, track every open and click."
+category: "Dashboard"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "FastAPI"
+  - "SQLite"
+  - "Jinja2"
+  - "Docker"
+  - "Resend (transactional email)"
+  - "Anthropic Claude"
+  - "Telegram bot alerts"
+  - "macOS LaunchAgents"
+aiAngle: "Claude reads each prospect's existing website, scores it against an SEO and UX rubric (schema markup, meta tags, alt text, blog presence, page speed), then drafts a cold email that quotes the specific weaknesses and offers a free preview redesign hosted on a tracking subdomain. Every preview click pings Telegram with the prospect's name, industry, site score, and the exact weaknesses pitched."
+metrics:
+  - { label: "Pipeline stages", value: "7" }
+  - { label: "Tracked events", value: "Open + click + follow-up" }
+  - { label: "Schedule", value: "LaunchAgent automated" }
+  - { label: "Status", value: "In production" }
+featured: true
+order: 55
+---
+
+## Why I built this
+
+Generic cold outreach has a near-zero reply rate. The thing that actually gets opened is an email that proves you already looked at the prospect's site, names the specific things wrong with it, and shows them a better version they can click through to in five seconds. Doing that by hand for one prospect takes 30 minutes. Doing it by hand for 50 prospects is a job nobody finishes.
+
+So I built the system that does it for me.
+
+## The pipeline
+
+The dashboard manages a seven-stage funnel: imported, audited, preview generated, sent, opened, clicked, replied. Each stage is its own table view with filters and bulk actions.
+
+**Prospecting.** Imports lead lists (CSV or scraped from local-business directories) into SQLite. Dedupes by domain, normalizes phone and address fields.
+
+**Audit.** Each lead's website gets a rule-based scan plus a Claude-powered analysis. The rule layer checks for the table-stakes signals: meta description, OG tags, JSON-LD schema, image alt text, sitemap, robots.txt, mobile viewport, page speed proxies. Claude reads the rendered HTML and flags qualitative weaknesses: weak hero copy, no clear CTA, dated design, missing local SEO, no testimonials.
+
+**Preview generation.** For high-scoring opportunities, the system spins up a redesign preview hosted at a per-lead URL on a tracking subdomain. Includes a tracking pixel and a click-counter that fires per page view.
+
+**Outreach.** Resend sends the cold email containing the preview link and a tight summary of the audit findings. Templates are personalized per industry vertical.
+
+**Tracking.** Opens (pixel) and clicks (preview page hits) flow back into the dashboard and a Telegram bot. Telegram alerts include the lead's name, industry, site score, and the exact weaknesses the email pitched, so I can call back warm within minutes of an open.
+
+**Follow-up.** Engaged leads get a follow-up cadence; unengaged leads get a different second-touch script. Both fire from scheduled LaunchAgents on the host Mac.
+
+**Conversion.** A separate clients view tracks signed engagements through their lifecycle: discovery call, proposal sent, contract signed, deliverables, retainer billing. Pricing tiers and tier-aware proposal templates live inside the dashboard so quotes go out consistent.
+
+## What this proves
+
+This is the project that ties everything else together. It's a real working system that runs unattended, makes outbound contact happen, and surfaces engagement signals fast enough to act on. The AI piece is the audit and the email drafting. The harder engineering is the boring middle: the SQLite schema that survives a year of pipeline state, the LaunchAgent timing that actually fires reliably across DST, the Telegram bot that doesn't spam itself out of usefulness, the click tracker that doesn't leak PII to logs.
+
+A model can write a clever email. A working pipeline that gets that email opened, the click captured, and a Telegram ping in your hand within 30 seconds is the part nobody screenshots.
