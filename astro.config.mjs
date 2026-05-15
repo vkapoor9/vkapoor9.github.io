@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   // User-site URL on GitHub Pages. Replace with a custom domain later.
-  site: 'https://vkapoor09.github.io',
+  site: 'https://vkapoor9.github.io',
   integrations: [react(), mdx(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
