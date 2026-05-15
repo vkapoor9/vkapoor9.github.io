@@ -13,9 +13,6 @@ export const site = {
   ],
   location: 'United States',
   email: 'vkapoor09@gmail.com',
-  linkedinUrl: 'LINKEDIN_URL_PLACEHOLDER',
-  githubUrl: 'GITHUB_URL_PLACEHOLDER',
-  twitterUrl: '',
   resumePath: '/VK%20Kapoor%20-%20Resume%202-Page%20(2026).pdf',
   photoPath: '/manu.jpg',
 } as const;

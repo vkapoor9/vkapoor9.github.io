@@ -52,10 +52,6 @@ import CopyEmail from '../components/CopyEmail.tsx';
         <div class="reveal flex flex-wrap items-center gap-3">
           <CopyEmail email={site.email} client:visible />
           <span class="text-[var(--color-ink-dim)]">·</span>
-          <a href={site.linkedinUrl} target="_blank" rel="noopener" class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">LinkedIn ↗</a>
-          <span class="text-[var(--color-ink-dim)]">·</span>
-          <a href={site.githubUrl} target="_blank" rel="noopener" class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">GitHub ↗</a>
-          <span class="text-[var(--color-ink-dim)]">·</span>
           <a href={site.resumePath} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">Résumé (PDF) ↗</a>
         </div>
       </div>
