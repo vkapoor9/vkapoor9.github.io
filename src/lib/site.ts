@@ -1,9 +1,9 @@
 // Personal info — replace placeholders before deploying.
 
 export const site = {
-  name: 'Vaibhav "Manu" Kapoor',
-  shortName: 'Manu Kapoor',
-  initials: 'MK',
+  name: 'Vaibhav Kapoor',
+  shortName: 'VK Kapoor',
+  initials: 'VK',
   role: 'Applied AI Engineer · AI Solutions Architect',
   tagline:
     'Builds AI products end-to-end — from model architecture and safety guardrails to payments, voice, and real users.',
