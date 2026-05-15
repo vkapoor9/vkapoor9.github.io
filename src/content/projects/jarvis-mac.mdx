@@ -1,0 +1,50 @@
+---
+title: "Jarvis Mac"
+tagline: "A fully local voice assistant on Apple Silicon — streaming pipeline, speculative decoding, on-device RAG."
+category: "AI Agent"
+role: "Architect, sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Python"
+  - "mlx-lm (Gemma 3.1 31B, MXFP4)"
+  - "Silero VAD v6"
+  - "parakeet-mlx (STT)"
+  - "Kokoro TTS"
+  - "SQLite + sqlite-vec + FTS"
+  - "FastAPI + WebSocket"
+  - "Swift / iOS"
+aiAngle: "End-to-end streaming on a Mac: VAD → STT → LLM (per-session prompt cache + speculative decoding) → TTS, with browser AEC and acoustic echo cancellation, plus a phoneme recognizer that learns mispronunciations from a single voice sample."
+metrics:
+  - { label: "Tests", value: "383 passing" }
+  - { label: "Active users", value: "2" }
+  - { label: "Model", value: "Gemma 3.1 31B (MXFP4)" }
+  - { label: "Latency", value: "Sub-second TTFB" }
+featured: true
+order: 40
+accent: "#d9a16e"
+---
+
+## Why I built this
+
+I wanted to know how far you could push a serious voice assistant on a single laptop. Not a prototype. A daily driver.
+
+## How it works
+
+- **Streaming pipeline.** Mic → Silero VAD → parakeet-mlx STT → mlx-lm LLM → Kokoro TTS → speakers. Every stage starts the moment it has enough input; nothing waits for "done."
+- **Per-session prompt cache.** The KV cache for the system prefix is reused across turns within a conversation, so the model effectively "remembers" without recomputing.
+- **Speculative decoding.** Profile-scoped — auto-detects when a smaller draft model is compatible with the target and falls back gracefully when it isn't.
+- **Pronunciation learning.** A teach-by-voice UI: I say "say my name like *this*" once, and a wav2vec2-based acoustic comparator + a regex layer remember it forever.
+- **Phase 4 RAG.** A separate document indexer LXC ingests iCloud and TrueNAS docs into sqlite-vec; the assistant answers from them at conversation speed.
+- **iOS twin.** A native AVFoundation client that does hardware AEC on the phone, so I can talk to the same brain from anywhere.
+
+## What it took
+
+- SQLite schema v5 with FTS + vec embeddings, hybrid retrieval (last 4 messages + top 5 facts + 2 past convos).
+- launchd service so it's just always there.
+- iCloud → TrueNAS rsync over SSH for offline doc availability.
+- 383 tests, currently green. Per-user voice profiles (`af_heart`, `af_jessica`).
+
+## What I learned
+
+When the round-trip latency matters more than the benchmark score, every layer of the stack has to cooperate. The win wasn't a clever prompt — it was prompt caching and speculative decoding playing nicely together with a streaming TTS that doesn't wait for the model to finish.

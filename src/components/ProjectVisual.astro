@@ -1,0 +1,295 @@
+---
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, resolve } from 'node:path';
+
+interface Props {
+  slug: string;
+  title: string;
+  size?: 'card' | 'hero';
+  accent?: string;
+}
+
+const { slug, title, size = 'card', accent } = Astro.props;
+
+// Per-project palette + glyph (used as fallback when no real screenshot exists).
+type Visual = {
+  accent: string;
+  bg: string;
+  glyph: 'nodes' | 'wave' | 'bubbles' | 'spark' | 'grid' | 'arches' | 'coin' | 'chart' | 'pin' | 'lines' | 'hex' | 'dots';
+};
+
+const map: Record<string, Visual> = {
+  'jarvis-v5':         { accent: '#9b87ff', bg: '#1a163a', glyph: 'nodes' },
+  'jarvis-mac':        { accent: '#5eead4', bg: '#0f2a2c', glyph: 'wave' },
+  'postypop':          { accent: '#f472b6', bg: '#2a1224', glyph: 'bubbles' },
+  'kidsai-buddy':      { accent: '#fbbf24', bg: '#2a1d0a', glyph: 'spark' },
+  'mission-control':   { accent: '#34d399', bg: '#0f2520', glyph: 'grid' },
+  'foundation-implants': { accent: '#d4a574', bg: '#241a10', glyph: 'arches' },
+  'prerna-kapoor':     { accent: '#f0a8c5', bg: '#241218', glyph: 'lines' },
+  'expense-tracker':   { accent: '#86efac', bg: '#0e2418', glyph: 'coin' },
+  'market-pulse':      { accent: '#fb7185', bg: '#2a0f15', glyph: 'chart' },
+  'realtor-buddy':     { accent: '#60a5fa', bg: '#0d1d36', glyph: 'pin' },
+  'markdown-app':      { accent: '#c4b5fd', bg: '#1c1733', glyph: 'lines' },
+  'crypto-portfolio':  { accent: '#fb923c', bg: '#2b1808', glyph: 'hex' },
+  'games':             { accent: '#f0abfc', bg: '#28102e', glyph: 'dots' },
+};
+
+const v: Visual = map[slug] ?? { accent: '#d9a16e', bg: '#1a1a1d', glyph: 'grid' };
+const ac = accent ?? v.accent;
+
+// Resolve the public directory to check for a real screenshot at build time.
+// Checks png, webp, jpg in order so any format works.
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const projectsDir = resolve(__dirname, '..', '..', 'public', 'projects');
+const candidates = ['png', 'webp', 'jpg', 'jpeg'].map((ext) => ({
+  ext,
+  abs: resolve(projectsDir, `${slug}.${ext}`),
+}));
+const found = candidates.find((c) => existsSync(c.abs));
+const hasScreenshot = Boolean(found);
+const screenshotPath = found ? `/projects/${slug}.${found.ext}` : '';
+
+const initials = title
+  .replace(/&/g, '')
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('')
+  .toUpperCase();
+
+const W = 800;
+const H = size === 'hero' ? 450 : 500;
+const id = `pv-${slug}`;
+---
+
+{hasScreenshot ? (
+  <div
+    class={`relative overflow-hidden ${size === 'hero' ? 'aspect-[16/9]' : 'aspect-[16/10]'}`}
+    style={`background: linear-gradient(135deg, ${v.bg} 0%, color-mix(in srgb, ${ac} 25%, ${v.bg}) 100%);`}
+  >
+    <!-- Browser-frame chrome -->
+    <div class="absolute top-0 inset-x-0 h-7 sm:h-8 flex items-center gap-1.5 px-3 sm:px-4 bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur-sm border-b border-white/5">
+      <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white/15" aria-hidden="true"></span>
+      <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white/15" aria-hidden="true"></span>
+      <span class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white/15" aria-hidden="true"></span>
+      <div class="ml-2 flex-1 h-3 sm:h-3.5 max-w-xs rounded-md bg-white/[0.06]" aria-hidden="true"></div>
+    </div>
+    <!-- The screenshot itself, tucked under the chrome -->
+    <img
+      src={screenshotPath}
+      alt={`${title} screenshot`}
+      class="absolute top-7 sm:top-8 inset-x-0 bottom-0 w-full h-[calc(100%-1.75rem)] sm:h-[calc(100%-2rem)] object-cover object-top"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+) : (
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="xMidYMid slice"
+    class={`block w-full h-full ${size === 'hero' ? 'aspect-[16/9]' : 'aspect-[16/10]'}`}
+    role="img"
+    aria-label={`${title} cover`}
+  >
+    <defs>
+      <radialGradient id={`${id}-bg`} cx="30%" cy="20%" r="120%">
+        <stop offset="0%" stop-color={ac} stop-opacity="0.55" />
+        <stop offset="35%" stop-color={ac} stop-opacity="0.18" />
+        <stop offset="100%" stop-color={v.bg} stop-opacity="1" />
+      </radialGradient>
+      <linearGradient id={`${id}-fade`} x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color={v.bg} stop-opacity="0" />
+        <stop offset="100%" stop-color={v.bg} stop-opacity="0.55" />
+      </linearGradient>
+      <filter id={`${id}-noise`}>
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" />
+        <feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0" />
+      </filter>
+    </defs>
+
+    <rect width={W} height={H} fill={v.bg} />
+    <rect width={W} height={H} fill={`url(#${id}-bg)`} />
+
+    <g opacity="0.92">
+      {v.glyph === 'nodes' && (
+        <g stroke={ac} stroke-width="1.25" fill="none">
+          <circle cx="200" cy="140" r="6" fill={ac} />
+          <circle cx="380" cy="100" r="4" fill={ac} opacity="0.6" />
+          <circle cx="540" cy="180" r="8" fill={ac} />
+          <circle cx="660" cy="110" r="3" fill={ac} opacity="0.6" />
+          <circle cx="280" cy="240" r="5" fill={ac} />
+          <circle cx="460" cy="260" r="6" fill={ac} />
+          <circle cx="600" cy="320" r="4" fill={ac} opacity="0.6" />
+          <circle cx="160" cy="340" r="7" fill={ac} />
+          <circle cx="380" cy="380" r="5" fill={ac} opacity="0.6" />
+          <line x1="200" y1="140" x2="380" y2="100" />
+          <line x1="380" y1="100" x2="540" y2="180" />
+          <line x1="540" y1="180" x2="660" y2="110" />
+          <line x1="200" y1="140" x2="280" y2="240" />
+          <line x1="280" y1="240" x2="460" y2="260" />
+          <line x1="460" y1="260" x2="540" y2="180" />
+          <line x1="460" y1="260" x2="600" y2="320" />
+          <line x1="280" y1="240" x2="160" y2="340" />
+          <line x1="160" y1="340" x2="380" y2="380" />
+          <line x1="380" y1="380" x2="600" y2="320" />
+        </g>
+      )}
+
+      {v.glyph === 'wave' && (
+        <g stroke={ac} fill="none" stroke-width="1.5" stroke-linecap="round">
+          <path d="M 0 250 Q 100 180, 200 250 T 400 250 T 600 250 T 800 250" opacity="0.85" />
+          <path d="M 0 270 Q 100 200, 200 270 T 400 270 T 600 270 T 800 270" opacity="0.55" />
+          <path d="M 0 290 Q 100 220, 200 290 T 400 290 T 600 290 T 800 290" opacity="0.35" />
+          <path d="M 0 230 Q 100 160, 200 230 T 400 230 T 600 230 T 800 230" opacity="0.55" />
+          <path d="M 0 210 Q 100 140, 200 210 T 400 210 T 600 210 T 800 210" opacity="0.35" />
+        </g>
+      )}
+
+      {v.glyph === 'bubbles' && (
+        <g fill="none" stroke={ac} stroke-width="1.5">
+          <circle cx="200" cy="180" r="60" opacity="0.85" />
+          <circle cx="380" cy="240" r="80" opacity="0.6" />
+          <circle cx="560" cy="170" r="50" opacity="0.85" />
+          <circle cx="640" cy="290" r="70" opacity="0.55" />
+          <circle cx="280" cy="320" r="45" opacity="0.7" />
+          <circle cx="200" cy="180" r="6" fill={ac} />
+          <circle cx="380" cy="240" r="6" fill={ac} />
+          <circle cx="560" cy="170" r="6" fill={ac} />
+        </g>
+      )}
+
+      {v.glyph === 'spark' && (
+        <g fill={ac}>
+          <path d="M 400 150 L 415 230 L 480 240 L 415 250 L 400 330 L 385 250 L 320 240 L 385 230 Z" opacity="0.95" />
+          <path d="M 600 120 L 608 168 L 644 175 L 608 182 L 600 230 L 592 182 L 556 175 L 592 168 Z" opacity="0.55" />
+          <path d="M 200 320 L 207 358 L 234 363 L 207 368 L 200 406 L 193 368 L 166 363 L 193 358 Z" opacity="0.55" />
+          <circle cx="700" cy="350" r="3" />
+          <circle cx="170" cy="190" r="3" />
+          <circle cx="540" cy="380" r="3" />
+        </g>
+      )}
+
+      {v.glyph === 'grid' && (
+        <g stroke={ac} stroke-width="1" fill="none">
+          {Array.from({ length: 9 }).map((_, i) => (
+            <circle cx={150 + i * 60} cy={150} r="3" fill={ac} opacity={0.3 + (i % 3) * 0.2} />
+          ))}
+          {Array.from({ length: 9 }).map((_, i) => (
+            <circle cx={150 + i * 60} cy={210} r="3" fill={ac} opacity={0.3 + ((i + 1) % 3) * 0.2} />
+          ))}
+          {Array.from({ length: 9 }).map((_, i) => (
+            <circle cx={150 + i * 60} cy={270} r="3" fill={ac} opacity={0.3 + ((i + 2) % 3) * 0.2} />
+          ))}
+          {Array.from({ length: 9 }).map((_, i) => (
+            <circle cx={150 + i * 60} cy={330} r="3" fill={ac} opacity={0.3 + (i % 3) * 0.2} />
+          ))}
+          <rect x="328" y="188" width="124" height="104" rx="4" stroke-width="1.5" />
+        </g>
+      )}
+
+      {v.glyph === 'arches' && (
+        <g fill="none" stroke={ac} stroke-width="1.5">
+          <path d="M 150 360 L 150 240 Q 150 160, 230 160 Q 310 160, 310 240 L 310 360 Z" opacity="0.85" />
+          <path d="M 340 360 L 340 220 Q 340 130, 430 130 Q 520 130, 520 220 L 520 360 Z" opacity="0.95" />
+          <path d="M 550 360 L 550 240 Q 550 160, 630 160 Q 710 160, 710 240 L 710 360 Z" opacity="0.7" />
+          <line x1="100" y1="360" x2="760" y2="360" stroke-width="1" />
+        </g>
+      )}
+
+      {v.glyph === 'coin' && (
+        <g>
+          <circle cx="400" cy="240" r="100" fill="none" stroke={ac} stroke-width="1.5" />
+          <circle cx="400" cy="240" r="70" fill="none" stroke={ac} stroke-width="1" opacity="0.55" />
+          <circle cx="400" cy="240" r="40" fill={ac} opacity="0.85" />
+          <circle cx="220" cy="160" r="32" fill="none" stroke={ac} stroke-width="1" opacity="0.5" />
+          <circle cx="600" cy="350" r="25" fill="none" stroke={ac} stroke-width="1" opacity="0.6" />
+        </g>
+      )}
+
+      {v.glyph === 'chart' && (
+        <g fill="none" stroke={ac} stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="100,340 180,290 240,310 320,220 400,260 480,180 560,210 640,140 720,170" />
+          <polyline points="100,360 180,330 240,340 320,290 400,310 480,260 560,280 640,230 720,250" opacity="0.45" stroke-dasharray="3 4" />
+          <circle cx="320" cy="220" r="4" fill={ac} />
+          <circle cx="480" cy="180" r="4" fill={ac} />
+          <circle cx="640" cy="140" r="4" fill={ac} />
+        </g>
+      )}
+
+      {v.glyph === 'pin' && (
+        <g>
+          <path
+            d="M 400 130 C 350 130, 320 175, 320 215 C 320 270, 400 360, 400 360 C 400 360, 480 270, 480 215 C 480 175, 450 130, 400 130 Z"
+            fill="none"
+            stroke={ac}
+            stroke-width="1.75"
+          />
+          <circle cx="400" cy="215" r="20" fill={ac} />
+          <ellipse cx="400" cy="395" rx="60" ry="8" fill={ac} opacity="0.35" />
+          <line x1="80" y1="380" x2="720" y2="380" stroke={ac} stroke-width="0.5" opacity="0.35" stroke-dasharray="2 6" />
+          <line x1="80" y1="100" x2="720" y2="100" stroke={ac} stroke-width="0.5" opacity="0.35" stroke-dasharray="2 6" />
+        </g>
+      )}
+
+      {v.glyph === 'lines' && (
+        <g stroke={ac} stroke-width="1" stroke-linecap="round">
+          <line x1="220" y1="160" x2="580" y2="160" stroke-width="3" />
+          <line x1="220" y1="195" x2="540" y2="195" opacity="0.7" />
+          <line x1="220" y1="220" x2="560" y2="220" opacity="0.7" />
+          <line x1="220" y1="245" x2="500" y2="245" opacity="0.5" />
+          <line x1="220" y1="280" x2="580" y2="280" stroke-width="2" />
+          <line x1="220" y1="315" x2="520" y2="315" opacity="0.7" />
+          <line x1="220" y1="340" x2="560" y2="340" opacity="0.5" />
+        </g>
+      )}
+
+      {v.glyph === 'hex' && (
+        <g fill="none" stroke={ac} stroke-width="1.5">
+          <polygon points="400,140 488,190 488,290 400,340 312,290 312,190" />
+          <polygon points="400,180 460,212 460,272 400,304 340,272 340,212" opacity="0.55" />
+          <polygon points="220,210 268,238 268,294 220,322 172,294 172,238" opacity="0.5" />
+          <polygon points="580,210 628,238 628,294 580,322 532,294 532,238" opacity="0.5" />
+          <circle cx="400" cy="240" r="12" fill={ac} />
+        </g>
+      )}
+
+      {v.glyph === 'dots' && (
+        <g fill={ac}>
+          <circle cx="220" cy="180" r="10" />
+          <circle cx="280" cy="180" r="10" opacity="0.55" />
+          <circle cx="340" cy="180" r="10" />
+          <circle cx="400" cy="180" r="10" opacity="0.55" />
+          <circle cx="220" cy="240" r="10" opacity="0.55" />
+          <circle cx="280" cy="240" r="10" />
+          <circle cx="340" cy="240" r="10" opacity="0.55" />
+          <circle cx="400" cy="240" r="10" />
+          <circle cx="220" cy="300" r="10" />
+          <circle cx="280" cy="300" r="10" opacity="0.55" />
+          <circle cx="340" cy="300" r="10" />
+          <circle cx="400" cy="300" r="10" opacity="0.55" />
+          <rect x="500" y="160" width="160" height="160" rx="20" fill="none" stroke={ac} stroke-width="1.5" />
+          <circle cx="540" cy="200" r="8" />
+          <circle cx="620" cy="200" r="8" />
+          <circle cx="540" cy="280" r="8" />
+          <circle cx="620" cy="280" r="8" />
+        </g>
+      )}
+    </g>
+
+    <text
+      x={W - 40}
+      y={H - 32}
+      text-anchor="end"
+      font-family="Fraunces Variable, ui-serif, Georgia, serif"
+      font-size={size === 'hero' ? '120' : '140'}
+      fill={ac}
+      fill-opacity="0.18"
+      font-weight="500"
+    >{initials}</text>
+
+    <rect width={W} height={H} fill={`url(#${id}-fade)`} />
+    <rect width={W} height={H} filter={`url(#${id}-noise)`} opacity="0.4" />
+  </svg>
+)}

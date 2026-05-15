@@ -1,0 +1,52 @@
+---
+title: "PostyPop"
+tagline: "One piece of content → 22 platform-tuned variations in seconds. Live SaaS, real customers."
+category: "SaaS"
+role: "Founder, sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Astro 5"
+  - "React"
+  - "Node.js"
+  - "MySQL 8"
+  - "Groq (Llama 4 Scout)"
+  - "Multi-model fallback chain"
+  - "Lemon Squeezy"
+  - "Chrome Extension MV3"
+  - "Cloudflare"
+  - "Hostinger Business"
+demoUrl: "https://postypop.app"
+aiAngle: "Platform-specific prompt engineering (character limits, hashtag density, voice) layered on a four-stage fallback chain — Groq Scout → Llama 3.3 70B → Compound → GPT-4o-mini — so output stays consistent regardless of which model executes the request."
+metrics:
+  - { label: "Platforms", value: "11" }
+  - { label: "Variants per post", value: "22" }
+  - { label: "Pricing tiers", value: "Free · Premium · Pro" }
+  - { label: "Status", value: "Payments live" }
+featured: true
+order: 20
+accent: "#d9a16e"
+---
+
+## Why I built this
+
+Creators rewrite the same post for LinkedIn, Twitter, Instagram, TikTok, Threads, Bluesky, Pinterest, Mastodon, Discord, YouTube, and Facebook — by hand. Eleven platforms, eleven voices, eleven character limits. The work is real and the LLMs are good enough; nobody had stitched it into a clean product yet.
+
+## How it works
+
+- **Single input, 22 outputs.** Two A/B variations per platform, each tuned to that platform's conventions (LinkedIn formal, Twitter punchy, Instagram hashtag-dense, TikTok hook-driven).
+- **Multi-model fallback.** Groq's Llama 4 Scout for speed; if quota hits or output fails validation, automatic failover through Llama 3.3 70B → Compound → GPT-4o-mini. The user never sees a "rate-limited" error.
+- **Brand voice.** Pro tier learns a tone from samples and applies it across every variation.
+- **Chrome extension.** Highlight text on any page, generate, copy, paste. Manifest V3, approved on the Chrome Web Store.
+- **End-to-end SaaS.** Sign-in (Google + Apple OAuth, email/password with bcrypt), email verification, Lemon Squeezy webhooks for the full subscription lifecycle, audit log, GDPR export.
+
+## What it took
+
+- A 741-line CLAUDE.md of operational lessons — including the security work: SSRF guards on user-supplied URLs, HMAC webhook verification, constant-time password comparison, parameterized SQL.
+- Production deployment on Hostinger Business with a `start.mjs` bootstrap.
+- llms.txt + JSON-LD + OG + sitemap, because launching a SaaS in 2026 means launching for AI crawlers too.
+- Splash animation built with GSAP (logo draws, fills, pops, brand reveal) — a one-time joke that took longer than it should have, and earned its keep.
+
+## What I learned
+
+Shipping a SaaS in public teaches you that the LLM is the easy part. The actual work is OAuth flows, webhook idempotency, abuse prevention, and the unglamorous middle layer that keeps a paid customer from rage-quitting on a Sunday morning.

@@ -1,0 +1,52 @@
+---
+import { site } from '../lib/site';
+---
+
+<section class="relative overflow-hidden">
+  <div class="container-x pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-40 lg:pb-32">
+    <div class="max-w-4xl">
+      <p class="reveal flex items-center gap-3 text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-8">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
+        Available for new roles · {site.location}
+      </p>
+
+      <h1 class="reveal font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight mb-8">
+        I build <em class="not-italic text-[var(--color-accent)]">AI products</em> that reach real users — end&#8209;to&#8209;end.
+      </h1>
+
+      <p class="reveal text-[18px] sm:text-[20px] leading-relaxed text-[var(--color-ink-soft)] max-w-3xl mb-10">
+        Architecture and safety guardrails. Voice pipelines and on-device inference. Payments, OAuth, Chrome extensions, dashboards. <span class="text-[var(--color-ink)]">Two live SaaS products. A privacy-first family agent. A kid-safe tutor used daily by seven kids.</span> Every project shipped, every project used.
+      </p>
+
+      <div class="reveal flex flex-wrap items-center gap-3 mb-12">
+        <a
+          href="/projects"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[var(--color-ink)] text-[var(--color-bg)] text-[14px] font-medium hover:bg-[var(--color-accent)] transition-colors"
+        >
+          Browse the work
+          <span aria-hidden="true">→</span>
+        </a>
+        <a
+          href={site.resumePath}
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-line)] text-[14px] hover:border-[var(--color-ink-dim)] transition-colors"
+        >
+          Download résumé
+        </a>
+      </div>
+
+      <div class="reveal flex flex-wrap gap-x-8 gap-y-3 text-[13px] text-[var(--color-ink-dim)] font-mono">
+        <span><strong class="text-[var(--color-ink)] font-normal">13</strong> projects shipped</span>
+        <span><strong class="text-[var(--color-ink)] font-normal">2</strong> live SaaS products</span>
+        <span><strong class="text-[var(--color-ink)] font-normal">8</strong> specialized AI agents</span>
+        <span><strong class="text-[var(--color-ink)] font-normal">2</strong> paid client sites</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative gradient -->
+  <div
+    class="pointer-events-none absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl"
+    style="background: radial-gradient(circle at center, var(--color-accent) 0%, transparent 70%);"
+    aria-hidden="true"
+  ></div>
+</section>

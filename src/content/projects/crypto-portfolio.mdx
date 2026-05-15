@@ -1,0 +1,29 @@
+---
+title: "Crypto Portfolio"
+tagline: "Multi-exchange P&L viewer — and the post-mortem on a retired trading-bot experiment."
+category: "Dashboard"
+role: "Sole engineer"
+year: "2026"
+status: "Retired"
+stack:
+  - "Next.js"
+  - "Node.js / Express"
+  - "MySQL"
+  - "Coinbase / Binance / Ledger via CoinStats API"
+  - "Ollama (Gemma 31B)"
+aiAngle: "Local Gemma 31B for analyzing trade history and generating per-period summaries — never in the loop on actual trade decisions, which were the point that the experiment had to end."
+metrics:
+  - { label: "Exchanges integrated", value: "3" }
+  - { label: "P&L method", value: "FIFO" }
+  - { label: "Bots", value: "Shut down 2026-04-19" }
+featured: false
+order: 150
+---
+
+## What it is
+
+A read-only portfolio dashboard aggregating Coinbase, Binance, and Ledger holdings via the CoinStats API. FIFO P&L, six metric cards, full trade history with filters and pagination, and a local Gemma 31B for natural-language analysis.
+
+The reason it's "Retired" is the most useful part of the story: I spent months on automated trading bots, learned a lot about latency, slippage, exchange rate-limits, and my own risk tolerance — and shut the bots down on 2026-04-19. The dashboard remains because it's still useful for understanding holdings; the experiment ended because the math didn't work in my favor.
+
+Calling shots that don't pan out is a portfolio piece too.

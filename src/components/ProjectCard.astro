@@ -1,0 +1,79 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectVisual from './ProjectVisual.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  size?: 'lg' | 'md' | 'sm';
+}
+
+const { project, size = 'md' } = Astro.props;
+const { data, slug } = project;
+
+const statusColors: Record<string, string> = {
+  Live: 'bg-emerald-500',
+  Shipped: 'bg-emerald-500',
+  Active: 'bg-emerald-500',
+  Beta: 'bg-amber-500',
+  Prototype: 'bg-sky-500',
+  Retired: 'bg-zinc-500',
+};
+const dotColor = statusColors[data.status] ?? 'bg-zinc-500';
+---
+
+<a
+  href={`/projects/${slug}`}
+  class="group reveal block relative isolate rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] hover:border-[var(--color-ink-dim)] transition-all duration-300 hover:-translate-y-px overflow-hidden"
+>
+  <!-- Visual -->
+  <div class="relative overflow-hidden border-b border-[var(--color-line)]/60">
+    <div class="transition-transform duration-700 ease-out group-hover:scale-[1.02]">
+      <ProjectVisual slug={slug} title={data.title} size="card" />
+    </div>
+    <div class="absolute top-3 right-3 flex items-center gap-2 text-[11px] font-mono text-[var(--color-ink)] bg-[color-mix(in_srgb,var(--color-bg)_70%,transparent)] backdrop-blur-sm border border-white/10 rounded-full px-3 py-1">
+      <span class={`w-1.5 h-1.5 rounded-full ${dotColor}`} aria-hidden="true"></span>
+      <span>{data.status}</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class={size === 'lg' ? 'p-7 sm:p-9' : size === 'md' ? 'p-6 sm:p-7' : 'p-5'}>
+    <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[var(--color-ink-dim)] mb-3">
+      <span>{data.category}</span>
+      <span class="opacity-40">·</span>
+      <span>{data.year}</span>
+    </div>
+
+    <h3 class={`font-display tracking-tight ${size === 'lg' ? 'text-3xl sm:text-4xl' : size === 'md' ? 'text-2xl sm:text-3xl' : 'text-xl'} mb-3 group-hover:text-[var(--color-accent)] transition-colors`}>
+      {data.title}
+    </h3>
+
+    <p class={`text-[var(--color-ink-soft)] leading-relaxed mb-5 ${size === 'sm' ? 'text-[14px]' : ''}`}>
+      {data.tagline}
+    </p>
+
+    {size !== 'sm' && data.metrics && data.metrics.length > 0 && (
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5 pt-4 border-t border-[var(--color-line)]/60">
+        {data.metrics.slice(0, 4).map((m) => (
+          <div>
+            <div class="text-[11px] font-mono uppercase tracking-widest text-[var(--color-ink-dim)] mb-1">{m.label}</div>
+            <div class="text-[14px] text-[var(--color-ink)]">{m.value}</div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    <div class="flex flex-wrap gap-1.5">
+      {data.stack.slice(0, size === 'sm' ? 3 : 5).map((s) => (
+        <span class="chip">{s}</span>
+      ))}
+      {data.stack.length > (size === 'sm' ? 3 : 5) && (
+        <span class="chip text-[var(--color-ink-dim)]">+{data.stack.length - (size === 'sm' ? 3 : 5)}</span>
+      )}
+    </div>
+  </div>
+
+  <div class="absolute bottom-5 right-5 sm:bottom-7 sm:right-7 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all">
+    <span class="text-[var(--color-accent)] text-lg">→</span>
+  </div>
+</a>

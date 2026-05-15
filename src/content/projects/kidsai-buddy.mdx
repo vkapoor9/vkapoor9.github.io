@@ -1,0 +1,51 @@
+---
+title: "KidsAI Buddy"
+tagline: "Kid-safe AI tutor used daily by seven kids — fully local inference, fully local TTS."
+category: "Educational AI"
+role: "Founder, sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "FastAPI"
+  - "Python"
+  - "Ollama (Gemma 3 4B)"
+  - "Kokoro-82M TTS (local)"
+  - "PostgreSQL"
+  - "Docker Compose"
+  - "Cloudflare Tunnel"
+  - "Vanilla JS frontend"
+demoUrl: "https://kidsaibuddy.com"
+aiAngle: "Socratic-method system prompts that ask guiding questions instead of giving answers, wrapped in a four-layer safety pipeline (profanity filter → jailbreak detector → homework-integrity check → topic boundary) — all running on a Proxmox VM, no kid utterance leaves the home network."
+metrics:
+  - { label: "Active kids", value: "7" }
+  - { label: "Color themes", value: "15" }
+  - { label: "Buddy emojis", value: "126" }
+  - { label: "Gamification", value: "1000+ LOC" }
+featured: true
+order: 30
+accent: "#d9a16e"
+---
+
+## Why I built this
+
+My kids wanted to talk to an AI. I wasn't going to hand them ChatGPT. So I built one whose entire job is to be kind, curious, and incapable of doing their homework for them.
+
+## How it works
+
+- **Socratic by design.** The system prompt forbids direct answers on homework; the model asks the kid what they think first, then nudges. A separate "homework-integrity" classifier flags suspicious requests for the parent dashboard.
+- **Four-layer safety.** Profanity filter → jailbreak detection → homework-integrity check → topic boundary. Layers run **before and after** generation so a model that drifts gets caught.
+- **Voice mode.** Browser STT + barge-in (the kid can interrupt mid-sentence). Speech synthesized locally by Kokoro-82M — no audio touches the cloud.
+- **Gamification.** XP, levels, streaks, badges — but transparent. The kids can see exactly how the points work; no dark patterns.
+- **Parent admin.** Conversation review, safety-flag triage, per-kid difficulty selector (Light / Medium / Hard).
+- **15 themes, 126 emojis.** Because making it theirs matters more than I expected.
+
+## What it took
+
+- A FastAPI service plus a Kokoro TTS sidecar in its own container — model updates ship without taking the chat down.
+- Cloudflare Tunnel for outbound-only exposure (no port-forward, no public IP).
+- Welcome tour onboarding so a kid can use it without an adult walking through.
+- Detailed audit log behind the parent dashboard.
+
+## What I learned
+
+Safety in kids' AI isn't a single classifier with a high recall number. It's a **layered** system where the post-generation check catches the things the pre-generation check missed, and where the parent dashboard makes the unavoidable failures visible instead of silent.

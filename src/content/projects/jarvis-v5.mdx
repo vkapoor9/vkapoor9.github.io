@@ -1,0 +1,58 @@
+---
+title: "Jarvis V5"
+tagline: "A privacy-first family AI agent that runs on my own hardware."
+category: "AI Agent"
+role: "Architect, sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Next.js 15"
+  - "TypeScript"
+  - "Vercel AI SDK"
+  - "PostgreSQL 16 + pgvector"
+  - "Drizzle ORM"
+  - "Ollama (qwen3.5)"
+  - "Claude Sonnet 4.6"
+  - "Telegram (grammy)"
+  - "Proxmox / LXC"
+  - "PM2 + systemd"
+aiAngle: "Eight role-scoped agents coordinated through YAML manifests, with a three-tier safety system (READ / WRITE / DELETE) enforced at the database layer and family-role ACLs that travel with every voice request."
+metrics:
+  - { label: "Agents", value: "8 roles" }
+  - { label: "Voice tools", value: "23+" }
+  - { label: "Tests", value: "64 unit" }
+  - { label: "Family users", value: "3" }
+featured: true
+order: 10
+accent: "#d9a16e"
+---
+
+## Why I built this
+
+I wanted Siri-quality voice plus real agency — schedule things, run shell commands, edit code, manage my homelab — without sending a single utterance to a third party. Off-the-shelf assistants either don't act on your behalf, or they do, but only if you hand them the keys to your data.
+
+Jarvis runs on my Proxmox cluster. The model decides; the database enforces.
+
+## How it works
+
+- **Eight role-scoped agents.** General, coding, research, homelab, devops, content, finance, kids — each declared as a YAML manifest with its own toolset, memory scope, and permission ceiling.
+- **Open Brain memory.** A pgvector-backed long-term memory (768-dim `nomic-embed-text` embeddings) that classifies every fact as `vault` (private to one user) or `window` (shared family context). PII redaction runs before storage, not after.
+- **Three-tier safety.** Tools are tagged `read`, `write`, or `delete`. Voice can READ freely; WRITE requires confirmation; DELETE goes through a deferred queue with a 60-second cancel window. Enforced at the row level, not as a UI nicety.
+- **Family ACL.** Every request is authenticated against a role (admin / adult / kid). The kids' agent has a different model, different tools, different topics — and can't see vault facts from anyone else.
+- **Multi-surface.** Telegram (streaming), web chat, voice. Same agent backend, three thin frontends.
+
+## What it took
+
+- 8 PostgreSQL tables modeled with Drizzle, all migrations checked in.
+- Two LLMs working together: local Ollama (`qwen3.5`) for privacy-default tasks, Claude Sonnet 4.6 only when a task is explicitly tagged "cloud-ok."
+- 23+ voice-callable tools spanning Proxmox, Portainer, TrueNAS, Ollama lifecycle, SSH, web search.
+- Rate limiting (30 req/min/user), HMAC-verified Telegram webhooks, audit log on every state change.
+- 64 Vitest unit tests covering the safety classifier, ACL gates, and the deferred-delete queue.
+
+## How it deploys
+
+A separate multi-arch Docker scaffold (ARM64 + AMD64) ships the entire stack from one script — same image runs on the Mac for development and on the Proxmox VM for production. PM2 supervises the Node process; systemd brings it up on boot; NGINX terminates TLS in front. Boring on its own; load-bearing for everything else.
+
+## What I learned
+
+The interesting AI engineering problem on a personal agent isn't the model — it's enforcing trust. Most "agentic" demos cheat by giving the model omnipotent tools and crossing their fingers. The hard part is designing the ACL so the model **can't** do the wrong thing, not just so it **shouldn't.**

@@ -1,0 +1,91 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import SkillsRow from '../components/SkillsRow.astro';
+import { site } from '../lib/site';
+
+const projects = await getCollection('projects');
+const featured = projects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+const others = projects
+  .filter((p) => !p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout>
+  <Hero />
+
+  <section class="container-x py-16 sm:py-20">
+    <div class="reveal flex items-end justify-between gap-6 mb-10 sm:mb-14">
+      <div class="max-w-2xl">
+        <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-3">
+          Featured work
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl leading-tight tracking-tight">
+          Six projects, six different problems.
+        </h2>
+      </div>
+      <a href="/projects" class="hidden sm:inline-flex items-center gap-2 text-[14px] text-[var(--color-ink-dim)] hover:text-[var(--color-ink)] transition-colors whitespace-nowrap">
+        See all 13
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="grid gap-5 sm:gap-6 md:grid-cols-2">
+      {featured.map((p, i) => (
+        <ProjectCard project={p} size={i < 2 ? 'lg' : 'md'} />
+      ))}
+    </div>
+
+    <div class="mt-10 text-center sm:hidden">
+      <a href="/projects" class="inline-flex items-center gap-2 text-[14px] text-[var(--color-ink-dim)] hover:text-[var(--color-ink)] transition-colors">
+        See all 13
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <SkillsRow />
+
+  <section class="container-x py-16 sm:py-20 border-t border-[var(--color-line)]/60">
+    <div class="reveal flex items-end justify-between gap-6 mb-10">
+      <div class="max-w-2xl">
+        <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-3">
+          Also built
+        </p>
+        <h2 class="font-display text-2xl sm:text-3xl leading-tight tracking-tight">
+          Smaller things, useful things, retired things.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {others.map((p) => (
+        <ProjectCard project={p} size="sm" />
+      ))}
+    </div>
+  </section>
+
+  <section class="container-x py-24 sm:py-32 border-t border-[var(--color-line)]/60">
+    <div class="reveal max-w-3xl mx-auto text-center">
+      <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-6">
+        About
+      </p>
+      <h2 class="font-display text-3xl sm:text-5xl leading-[1.1] tracking-tight mb-8">
+        I'm <em class="not-italic text-[var(--color-accent)]">Manu</em>. I ship.
+      </h2>
+      <div class="space-y-5 text-[17px] sm:text-[18px] leading-relaxed text-[var(--color-ink-soft)]">
+        {site.bio.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
+        <a href="/about" class="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-[var(--color-line)] text-[14px] hover:border-[var(--color-ink-dim)] transition-colors">
+          Read the longer story
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

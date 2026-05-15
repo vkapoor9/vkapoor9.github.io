@@ -1,0 +1,43 @@
+---
+import { navLinks, site } from '../lib/site';
+import ThemeToggle from './ThemeToggle.tsx';
+
+const path = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-[var(--color-line)]/60 bg-[color-mix(in_srgb,var(--color-bg)_85%,transparent)] backdrop-blur-md">
+  <div class="container-x flex items-center justify-between h-16">
+    <a href="/" class="flex items-center gap-3 text-[15px] font-medium tracking-tight">
+      <span class="grid place-items-center w-8 h-8 rounded-md border border-[var(--color-line)] bg-[var(--color-surface)] font-display text-[15px]">
+        {site.initials}
+      </span>
+      <span class="hidden sm:inline text-[var(--color-ink)]">{site.shortName}</span>
+    </a>
+
+    <nav class="flex items-center gap-1 sm:gap-2 text-[14px]">
+      {navLinks.map((link) => {
+        const active = link.href === '/' ? path === '/' : path.startsWith(link.href);
+        return (
+          <a
+            href={link.href}
+            class={`px-3 py-2 rounded-md transition-colors ${
+              active
+                ? 'text-[var(--color-ink)]'
+                : 'text-[var(--color-ink-dim)] hover:text-[var(--color-ink)]'
+            }`}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+      <a
+        href={site.resumePath}
+        class="px-3 py-2 text-[14px] text-[var(--color-ink-dim)] hover:text-[var(--color-ink)] transition-colors"
+      >
+        Résumé
+      </a>
+      <span class="hidden sm:inline-block w-px h-5 mx-1 bg-[var(--color-line)]" aria-hidden="true"></span>
+      <ThemeToggle client:load />
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,85 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FilterChips from '../../components/FilterChips.tsx';
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return a.data.order - b.data.order;
+});
+
+const categories = Array.from(new Set(projects.map((p) => p.data.category)));
+
+const statusColors: Record<string, string> = {
+  Live: 'bg-emerald-500',
+  Shipped: 'bg-emerald-500',
+  Active: 'bg-emerald-500',
+  Beta: 'bg-amber-500',
+  Prototype: 'bg-sky-500',
+  Retired: 'bg-zinc-500',
+};
+---
+
+<BaseLayout title="All work" description="Every project Manu Kapoor has built — AI agents, SaaS, dashboards, mobile, and tools.">
+  <section class="container-x pt-20 sm:pt-28 pb-12">
+    <p class="reveal text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-4">
+      Index · {projects.length} projects
+    </p>
+    <h1 class="reveal font-display text-[clamp(2.25rem,5.5vw,4rem)] leading-[1.05] tracking-tight mb-6">
+      All the work, in one place.
+    </h1>
+    <p class="reveal text-[17px] sm:text-[18px] leading-relaxed text-[var(--color-ink-soft)] max-w-2xl mb-10">
+      Filter by category. Tap any row for the full case study — the AI architecture, the metrics, what shipped, what I learned.
+    </p>
+    <div class="reveal">
+      <FilterChips categories={categories} client:load />
+    </div>
+  </section>
+
+  <section class="container-x pb-32">
+    <ul class="border-t border-[var(--color-line)]/60">
+      {projects.map((p) => {
+        const dotColor = statusColors[p.data.status] ?? 'bg-zinc-500';
+        return (
+          <li
+            data-project-card
+            data-category={p.data.category}
+            class="group reveal border-b border-[var(--color-line)]/60"
+          >
+            <a
+              href={`/projects/${p.slug}`}
+              class="block py-7 sm:py-8 grid gap-4 sm:gap-6 sm:grid-cols-12 sm:items-baseline transition-colors hover:bg-[var(--color-surface)]/50 -mx-4 sm:-mx-6 px-4 sm:px-6 rounded-md"
+            >
+              <div class="sm:col-span-5">
+                <div class="flex items-center gap-2 text-[11px] font-mono uppercase tracking-widest text-[var(--color-ink-dim)] mb-2">
+                  <span>{p.data.category}</span>
+                  <span class="opacity-40">·</span>
+                  <span>{p.data.year}</span>
+                  {p.data.featured && (
+                    <>
+                      <span class="opacity-40">·</span>
+                      <span class="text-[var(--color-accent)]">★ Featured</span>
+                    </>
+                  )}
+                </div>
+                <h2 class="font-display text-2xl sm:text-3xl tracking-tight group-hover:text-[var(--color-accent)] transition-colors">
+                  {p.data.title}
+                </h2>
+              </div>
+              <p class="sm:col-span-5 text-[15px] text-[var(--color-ink-soft)] leading-relaxed">
+                {p.data.tagline}
+              </p>
+              <div class="sm:col-span-2 flex sm:justify-end items-center gap-3 text-[13px] font-mono text-[var(--color-ink-dim)]">
+                <span class="inline-flex items-center gap-2">
+                  <span class={`w-1.5 h-1.5 rounded-full ${dotColor}`} aria-hidden="true"></span>
+                  {p.data.status}
+                </span>
+                <span class="text-[var(--color-ink-dim)] group-hover:text-[var(--color-accent)] group-hover:translate-x-0.5 transition-all" aria-hidden="true">→</span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+</BaseLayout>

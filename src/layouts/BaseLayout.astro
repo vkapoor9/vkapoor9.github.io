@@ -1,0 +1,56 @@
+---
+import '../styles/globals.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import SEO from '../components/SEO.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  pathname?: string;
+}
+
+const { title, description, ogImage, pathname } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <SEO title={title} description={description} ogImage={ogImage} pathname={pathname} />
+    <script is:inline>
+      // Theme bootstrap — runs before paint.
+      (function () {
+        const stored = localStorage.getItem('theme');
+        const t = stored || 'dark';
+        if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-[var(--color-surface)] focus:text-[var(--color-ink)] focus:px-3 focus:py-2 focus:rounded">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      // Reveal animations on scroll.
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

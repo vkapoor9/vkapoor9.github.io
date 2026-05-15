@@ -1,0 +1,28 @@
+---
+title: "Market Pulse"
+tagline: "Daily market intelligence dashboard — seven tabs, one scheduled LLM aggregation pipeline."
+category: "Dashboard"
+role: "Sole engineer"
+year: "2026"
+status: "Beta"
+stack:
+  - "Node.js"
+  - "Python"
+  - "Recharts"
+  - "Docker / Nginx"
+  - "Scheduled cron"
+  - "LLM aggregation"
+aiAngle: "A nightly Python pipeline orchestrates web search, structured extraction, and LLM summarization across seven verticals (S&P earnings, crypto on-chain, macro risk, small-caps, pre-listing alpha, Fed calendar, Fear & Greed) — turning a noisy stream of data into a reading-time digest by 8 AM."
+metrics:
+  - { label: "Tabs", value: "7" }
+  - { label: "Pipeline", value: "670 lines Python" }
+  - { label: "Schedule", value: "Daily 8 AM" }
+featured: false
+order: 120
+---
+
+## What it is
+
+A self-hosted dashboard that does the work I'd otherwise pay a Bloomberg terminal to do (badly): consolidate the morning's market signals into one screen with tasteful Recharts visuals. Fear & Greed gauge, on-chain table, pre-listing channel monitor, economic calendar.
+
+The interesting bit is the **pipeline**: a single Python script that fans out to data providers and an LLM, normalizes everything to JSON, and writes static feeds Nginx can serve. No frontend rebuild required to update the data.

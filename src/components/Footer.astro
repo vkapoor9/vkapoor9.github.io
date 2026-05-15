@@ -1,0 +1,34 @@
+---
+import { site } from '../lib/site';
+import CopyEmail from './CopyEmail.tsx';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-[var(--color-line)]/60 mt-32">
+  <div class="container-x py-16 grid gap-10 md:grid-cols-2">
+    <div>
+      <p class="font-display text-3xl tracking-tight mb-3">Let's talk.</p>
+      <p class="text-[var(--color-ink-dim)] text-[15px] max-w-md leading-relaxed">
+        Open to senior roles in Applied AI Engineering, AI Solutions Architecture, and Engineering leadership.
+      </p>
+    </div>
+
+    <div class="text-[14px]">
+      <p class="text-[var(--color-ink-dim)] mb-3 font-mono text-[12px] uppercase tracking-widest">Reach me</p>
+      <ul class="space-y-2">
+        <li><CopyEmail email={site.email} client:visible /></li>
+        <li><a href={site.linkedinUrl} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+        <li><a href={site.githubUrl} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href={site.resumePath} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">Download résumé (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-[var(--color-line)]/60">
+    <div class="container-x py-6 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between text-[12px] text-[var(--color-ink-dim)] font-mono">
+      <span>© {year} {site.name}.</span>
+      <span>Built with Astro · Tailwind · Claude.</span>
+    </div>
+  </div>
+</footer>

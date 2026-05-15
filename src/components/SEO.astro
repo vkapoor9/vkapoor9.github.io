@@ -1,0 +1,31 @@
+---
+import { site } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  pathname?: string;
+}
+
+const { title, description, ogImage, pathname } = Astro.props;
+const fullTitle = title ? `${title} · ${site.shortName}` : `${site.shortName} — ${site.role}`;
+const desc = description ?? site.tagline;
+const url = pathname ? new URL(pathname, Astro.site).toString() : Astro.url.toString();
+const og = ogImage ?? '/og-default.png';
+---
+
+<title>{fullTitle}</title>
+<meta name="description" content={desc} />
+<link rel="canonical" href={url} />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={desc} />
+<meta property="og:url" content={url} />
+<meta property="og:image" content={og} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={desc} />
+<meta name="twitter:image" content={og} />
+<meta name="theme-color" content="#0a0a0b" />
+<meta name="author" content={site.name} />
