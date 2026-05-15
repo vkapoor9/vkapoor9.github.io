@@ -14,7 +14,7 @@ export const site = {
   location: 'United States',
   email: 'vkapoor09@gmail.com',
   resumePath: '/VK%20Kapoor%20-%20Resume%202-Page%20(2026).pdf',
-  photoPath: '/manu.jpg',
+  photoPath: '/VK.jpg',
 } as const;
 
 export const navLinks = [
