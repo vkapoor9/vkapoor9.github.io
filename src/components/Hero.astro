@@ -5,9 +5,11 @@ import { site } from '../lib/site';
 <section class="relative overflow-hidden">
   <div class="container-x pt-24 pb-20 sm:pt-32 sm:pb-28 lg:pt-40 lg:pb-32">
     <div class="max-w-4xl">
-      <p class="reveal flex items-center gap-3 text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-8">
+      <p class="reveal flex flex-wrap items-center gap-x-3 gap-y-2 text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-8">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
-        Available for new roles · {site.location}
+        Available for new roles
+        <span class="opacity-40">·</span>
+        Built with <a href="https://claude.com/claude-code" target="_blank" rel="noopener" class="text-[var(--color-accent)] hover:opacity-80">Claude Code</a>
       </p>
 
       <h1 class="reveal font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight mb-8">

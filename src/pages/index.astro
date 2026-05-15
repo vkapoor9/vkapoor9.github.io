@@ -48,6 +48,36 @@ const others = projects
     </div>
   </section>
 
+  <section class="container-x py-16 sm:py-20 border-t border-[var(--color-line)]/60">
+    <div class="reveal grid gap-10 lg:grid-cols-12 lg:gap-16 items-start">
+      <div class="lg:col-span-4">
+        <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-3">
+          Built with Claude
+        </p>
+        <h2 class="font-display text-3xl sm:text-4xl leading-tight tracking-tight">
+          Every line of this site, written with <a href="https://claude.com/claude-code" target="_blank" rel="noopener" class="text-[var(--color-accent)] hover:opacity-80 underline-offset-4 hover:underline">Claude Code</a>.
+        </h2>
+      </div>
+      <div class="lg:col-span-8 space-y-5 text-[16px] sm:text-[17px] leading-relaxed text-[var(--color-ink-soft)]">
+        <p>
+          The portfolio you are reading right now was built end to end with Claude Code as my pair programmer. So was every other project on this page. The model writes the code. I make the calls.
+        </p>
+        <p>
+          Several of these projects also ship Claude as part of their production runtime, not just their build process:
+        </p>
+        <ul>
+          <li><strong class="text-[var(--color-ink)] font-medium">Jarvis V5</strong> routes between local Ollama and Claude Sonnet 4.6 based on per-task privacy classification.</li>
+          <li><strong class="text-[var(--color-ink)] font-medium">Lead Engine</strong> uses Claude to read each prospect's website, score it against an SEO and UX rubric, and draft the personalized cold email.</li>
+          <li><strong class="text-[var(--color-ink)] font-medium">Prerna Kapoor</strong> runs three Claude Sonnet workflows live: a site chatbot, a backend listing-creation bot, and a scheduled blog pipeline.</li>
+          <li><strong class="text-[var(--color-ink)] font-medium">Foundation Implants</strong> was a paid build where every page of copy, schema, and FAQ was drafted with Claude in the loop.</li>
+        </ul>
+        <p>
+          The rest of the work uses local models on principle (KidsAI runs Ollama Gemma so kids' utterances never leave the home network; Jarvis Mac runs mlx-lm Gemma 3.1 entirely on Apple Silicon for the same reason). Picking the right model for the constraint is the job. Claude is the default when nothing else makes sense.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <SkillsRow />
 
   <section class="container-x py-16 sm:py-20 border-t border-[var(--color-line)]/60">
