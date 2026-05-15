@@ -18,8 +18,6 @@ const year = new Date().getFullYear();
       <p class="text-[var(--color-ink-dim)] mb-3 font-mono text-[12px] uppercase tracking-widest">Reach me</p>
       <ul class="space-y-2">
         <li><CopyEmail email={site.email} client:visible /></li>
-        <li><a href={site.linkedinUrl} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors" target="_blank" rel="noopener">LinkedIn ↗</a></li>
-        <li><a href={site.githubUrl} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors" target="_blank" rel="noopener">GitHub ↗</a></li>
         <li><a href={site.resumePath} class="text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors">Download résumé (PDF)</a></li>
       </ul>
     </div>

@@ -12,7 +12,7 @@ export const site = {
     'I work end-to-end: model architecture and safety guardrails through to payments, OAuth, observability, and the unglamorous middle layer that decides whether a real customer stays. The work on this site spans local LLMs on Apple Silicon, multi-agent systems with row-level ACLs, and a paid commercial engagement with a real client.',
   ],
   location: 'United States',
-  email: 'EMAIL_PLACEHOLDER@example.com',
+  email: 'vkapoor09@gmail.com',
   linkedinUrl: 'LINKEDIN_URL_PLACEHOLDER',
   githubUrl: 'GITHUB_URL_PLACEHOLDER',
   twitterUrl: '',
