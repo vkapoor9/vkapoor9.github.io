@@ -16,7 +16,6 @@
 - [Foundation Implants](/projects/foundation-implants): 40-page premium WordPress redesign for a Colorado periodontics practice. Paid commercial engagement ($5,500 + retainer).
 - [Expense Tracker](/projects/expense-tracker): Mobile-first PWA used daily by my mother in India.
 - [Market Pulse](/projects/market-pulse): Daily 7-tab market intelligence dashboard with scheduled LLM aggregation.
-- [Realtor Buddy](/projects/realtor-buddy): React Native field tool with Whisper voice notes and Claude-powered analysis.
 - [Markdown App (Codex)](/projects/markdown-app): Premium SwiftUI markdown reader for macOS, iPad, iOS.
 - [Crypto Portfolio](/projects/crypto-portfolio): Multi-exchange P&L viewer (trading bots retired 2026-04-19).
 - [Games & Experiments](/projects/games): Interactive prototypes.
