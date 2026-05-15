@@ -21,7 +21,7 @@ aiAngle: "Platform-specific prompt engineering (character limits, hashtag densit
 metrics:
   - { label: "Platforms", value: "11" }
   - { label: "Variants per post", value: "22" }
-  - { label: "Pricing tiers", value: "Free · Premium · Pro" }
+  - { label: "Auth", value: "OAuth + email" }
   - { label: "Status", value: "Payments live" }
 featured: true
 order: 20
@@ -36,7 +36,7 @@ Creators rewrite the same post for LinkedIn, Twitter, Instagram, TikTok, Threads
 
 - **Single input, 22 outputs.** Two A/B variations per platform, each tuned to that platform's conventions (LinkedIn formal, Twitter punchy, Instagram hashtag-dense, TikTok hook-driven).
 - **Multi-model fallback.** Groq's Llama 4 Scout for speed; if quota hits or output fails validation, automatic failover through Llama 3.3 70B → Compound → GPT-4o-mini. The user never sees a "rate-limited" error.
-- **Brand voice.** Pro tier learns a tone from samples and applies it across every variation.
+- **Brand voice.** Higher tiers learn a tone from samples and apply it across every variation.
 - **Chrome extension.** Highlight text on any page, generate, copy, paste. Manifest V3, approved on the Chrome Web Store.
 - **End-to-end SaaS.** Sign-in (Google + Apple OAuth, email/password with bcrypt), email verification, Lemon Squeezy webhooks for the full subscription lifecycle, audit log, GDPR export.
 
