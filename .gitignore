@@ -22,3 +22,7 @@ yarn-error.log*
 
 # OS
 Thumbs.db
+
+# Claude Code session memory (kept local, not pushed to public repo)
+CLAUDE.md
+.claude/
