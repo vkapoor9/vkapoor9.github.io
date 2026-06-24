@@ -4,9 +4,9 @@ export const site = {
   name: 'VK',
   shortName: 'VK',
   initials: 'VK',
-  role: 'Applied AI Engineer · AI Solutions Architect',
+  role: 'Applied AI Engineer · AWS-Certified Solutions Architect',
   tagline:
-    'Builds AI products end-to-end, from model architecture and safety guardrails to payments, voice, and real users.',
+    'AWS-Certified Solutions Architect (Professional) and Applied AI Engineer. 20+ years architecting secure, scalable cloud, now building AI products end-to-end.',
   bio: [
     'I build AI products. Privacy-first agents, kid-safe educational AI, production SaaS with real customers, on-device voice, every piece shipped, every piece used.',
     'I work end-to-end: model architecture and safety guardrails through to payments, OAuth, observability, and the unglamorous middle layer that decides whether a real customer stays. The work on this site spans local LLMs on Apple Silicon, multi-agent systems with row-level ACLs, and production websites that real businesses rely on.',
@@ -23,6 +23,49 @@ export const navLinks = [
   { href: '/about', label: 'About' },
 ] as const;
 
+export const certifications = [
+  {
+    name: 'AWS Solutions Architect',
+    level: 'Professional',
+    issuer: 'Amazon Web Services',
+    img: '/certs/aws-sa-professional.png',
+    verifyUrl: 'https://www.credly.com/badges/4f1c84ea-95ee-4328-8e05-6e7e1026dc34/public_url',
+  },
+  {
+    name: 'AWS Security',
+    level: 'Specialty',
+    issuer: 'Amazon Web Services',
+    img: '/certs/aws-security-specialty.png',
+    verifyUrl: 'https://www.credly.com/badges/7892f127-b6e2-4b24-bf9c-295a6228132d/public_url',
+  },
+  {
+    name: 'Microsoft Azure',
+    level: 'Fundamentals',
+    issuer: 'Microsoft',
+    img: '/certs/azure-fundamentals.png',
+    verifyUrl: 'https://www.credly.com/badges/69571edc-6ed9-4e87-96d1-96dfd0794f8f/public_url',
+  },
+] as const;
+
+export const cloud = {
+  summary:
+    "Before the AI work, and right alongside it, I've spent 20+ years as a cloud and solutions architect: leading large on-premises-to-AWS migrations for government and enterprise, designing to the AWS Well-Architected Framework, and owning security and cost from day one.",
+  highlights: [
+    {
+      title: 'Government cloud migrations at scale',
+      body: 'Lead Cloud Architect on a U.S. state driver-license system migrating to AWS, serving millions of residents. Deputy architect on a state health-and-human-services platform migration, leading the unstructured-data workstream from NetApp ONTAP to AWS FSx.',
+    },
+    {
+      title: 'Security & compliance (DevSecOps)',
+      body: 'Disaster recovery in AWS GovCloud, STIG/DISA hardening across the estate, and guardrails with Security Hub, WAF, GuardDuty, Config, and IAM Access Analyzer.',
+    },
+    {
+      title: 'Cost optimization (FinOps)',
+      body: 'Cost Explorer, Budgets, Trusted Advisor, Reserved Instances and Savings Plans. Replaced licensed software with a custom mobile app, cutting six figures a year in licensing costs.',
+    },
+  ],
+} as const;
+
 export const skillGroups = [
   {
     label: 'AI / ML',
@@ -35,6 +78,18 @@ export const skillGroups = [
       'Voice (STT/TTS/VAD, Kokoro, parakeet, Silero)',
       'Evals & A/B (OpenRouter)',
       'Prompt caching, system-prompt design',
+    ],
+  },
+  {
+    label: 'AWS / Cloud',
+    items: [
+      'EC2, S3, RDS, Lambda, VPC',
+      'IAM, CloudFormation, CloudWatch',
+      'FSx for NetApp ONTAP, EBS, EFS',
+      'Security Hub, WAF, GuardDuty, Config',
+      'Cost Explorer, Budgets, Savings Plans',
+      'Well-Architected Framework, GovCloud',
+      'CloudEndure DR, Route 53',
     ],
   },
   {

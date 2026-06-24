@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import Certifications from '../components/Certifications.astro';
+import CloudHighlights from '../components/CloudHighlights.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SkillsRow from '../components/SkillsRow.astro';
 import { site } from '../lib/site';
@@ -17,6 +19,10 @@ const others = projects
 
 <BaseLayout>
   <Hero />
+
+  <Certifications />
+
+  <CloudHighlights />
 
   <section class="container-x py-16 sm:py-20">
     <div class="reveal flex items-end justify-between gap-6 mb-10 sm:mb-14">

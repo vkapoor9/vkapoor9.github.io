@@ -1,0 +1,54 @@
+---
+import { certifications } from '../lib/site';
+
+interface Props {
+  heading?: string;
+}
+const { heading = 'Certifications' } = Astro.props;
+---
+
+<section class="container-x py-14 sm:py-16 border-t border-[var(--color-line)]/60">
+  <div class="reveal flex items-baseline justify-between gap-6 mb-8">
+    <div>
+      <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-2">
+        {heading}
+      </p>
+      <h2 class="font-display text-2xl sm:text-3xl tracking-tight">
+        Verified, not claimed.
+      </h2>
+    </div>
+    <span class="hidden sm:block text-[13px] text-[var(--color-ink-dim)] font-mono">
+      AWS · Azure
+    </span>
+  </div>
+
+  <div class="grid gap-4 sm:grid-cols-3">
+    {certifications.map((c) => (
+      <a
+        href={c.verifyUrl}
+        target="_blank"
+        rel="noopener"
+        class="reveal group flex items-center gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-4 sm:p-5 transition-colors hover:border-[var(--color-accent)]/50"
+      >
+        <img
+          src={c.img}
+          alt={`${c.name} ${c.level} badge`}
+          width="72"
+          height="72"
+          loading="lazy"
+          decoding="async"
+          class="w-14 h-14 sm:w-[68px] sm:h-[68px] flex-shrink-0 object-contain"
+        />
+        <span class="min-w-0">
+          <span class="block font-medium text-[15px] leading-tight text-[var(--color-ink)]">
+            {c.name}
+          </span>
+          <span class="block text-[13px] text-[var(--color-ink-soft)] mt-0.5">{c.level}</span>
+          <span class="mt-2 inline-flex items-center gap-1 text-[12px] font-mono text-[var(--color-ink-dim)] group-hover:text-[var(--color-accent)] transition-colors">
+            Verify on Credly ↗
+          </span>
+        </span>
+      </a>
+    ))}
+  </div>
+</section>

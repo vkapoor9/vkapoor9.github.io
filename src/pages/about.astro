@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { site, skillGroups } from '../lib/site';
 import CopyEmail from '../components/CopyEmail.tsx';
+import Certifications from '../components/Certifications.astro';
+import CloudHighlights from '../components/CloudHighlights.astro';
 ---
 
 <BaseLayout title="About" description={`About ${site.shortName}, ${site.role}.`}>
@@ -54,6 +56,10 @@ import CopyEmail from '../components/CopyEmail.tsx';
       </div>
     </div>
   </section>
+
+  <Certifications />
+
+  <CloudHighlights />
 
   <section class="container-x py-20 border-t border-[var(--color-line)]/60">
     <div class="reveal mb-12">

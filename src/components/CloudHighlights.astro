@@ -1,0 +1,28 @@
+---
+import { cloud } from '../lib/site';
+---
+
+<section class="container-x py-16 sm:py-20 border-t border-[var(--color-line)]/60">
+  <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-5 reveal">
+      <p class="text-[12px] font-mono uppercase tracking-[0.2em] text-[var(--color-ink-dim)] mb-3">
+        Cloud & Platform
+      </p>
+      <h2 class="font-display text-3xl sm:text-4xl leading-tight tracking-tight mb-6">
+        Two decades as a Solutions Architect.
+      </h2>
+      <p class="text-[17px] leading-relaxed text-[var(--color-ink-soft)] max-w-prose">
+        {cloud.summary}
+      </p>
+    </div>
+
+    <div class="lg:col-span-7 grid gap-4 sm:gap-5">
+      {cloud.highlights.map((h) => (
+        <div class="reveal rounded-xl border border-[var(--color-line)] bg-[var(--color-surface)] p-5 sm:p-6">
+          <h3 class="font-medium text-[16px] text-[var(--color-ink)] mb-2">{h.title}</h3>
+          <p class="text-[15px] leading-relaxed text-[var(--color-ink-soft)]">{h.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
