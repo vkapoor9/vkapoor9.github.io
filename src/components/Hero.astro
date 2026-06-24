@@ -12,9 +12,24 @@ import { site } from '../lib/site';
         Built with <a href="https://claude.com/claude-code" target="_blank" rel="noopener" class="text-[var(--color-accent)] hover:opacity-80">Claude Code</a>
       </p>
 
-      <h1 class="reveal font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight mb-8">
+      <h1 class="reveal font-display text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight mb-6">
         I build <em class="not-italic text-[var(--color-accent)]">AI products</em> that reach real users, end&#8209;to&#8209;end.
       </h1>
+
+      <div class="reveal cred-rotator mb-8" aria-label="Credentials and highlights">
+        <span class="cred-label">Certified</span>
+        <span class="cred-sep" aria-hidden="true">/</span>
+        <span class="cred-window">
+          <span class="cred-track" id="credTrack">
+            <span class="cred-item">AWS Solutions Architect, Professional</span>
+            <span class="cred-item">AWS Security, Specialty</span>
+            <span class="cred-item">$760K/yr cloud cost saved</span>
+            <span class="cred-item">20+ years architecting cloud</span>
+            <span class="cred-item">30+ AI apps shipped with Claude Code</span>
+            <span class="cred-item" aria-hidden="true">AWS Solutions Architect, Professional</span>
+          </span>
+        </span>
+      </div>
 
       <p class="reveal text-[18px] sm:text-[20px] leading-relaxed text-[var(--color-ink-soft)] max-w-3xl mb-10">
 AWS-certified Solutions Architect with 20+ years across government and enterprise cloud, now building AI products end-to-end: architecture and safety guardrails, voice pipelines, payments, OAuth, dashboards. <span class="text-[var(--color-ink)]">Two live SaaS products, a privacy-first family agent, a kid-safe tutor used daily by seven kids.</span> Every project shipped, every project used.
@@ -53,3 +68,44 @@ AWS-certified Solutions Architect with 20+ years across government and enterpris
     aria-hidden="true"
   ></div>
 </section>
+
+<style>
+  .cred-rotator {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: 'JetBrains Mono Variable', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+  }
+  .cred-label { color: var(--color-accent); white-space: nowrap; }
+  .cred-sep { color: var(--color-ink-dim); opacity: 0.5; }
+  .cred-window { position: relative; height: 1.6em; overflow: hidden; display: inline-block; }
+  .cred-track { display: flex; flex-direction: column; transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+  .cred-item { height: 1.6em; line-height: 1.6em; white-space: nowrap; color: var(--color-ink); }
+  @media (prefers-reduced-motion: reduce) {
+    .cred-track { transition: none; }
+  }
+</style>
+
+<script>
+  const track = document.getElementById('credTrack');
+  if (track && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const real = track.children.length - 1; // last item is a clone of the first
+    let i = 0;
+    setInterval(() => {
+      i += 1;
+      track.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+      track.style.transform = `translateY(-${i * 1.6}em)`;
+      if (i === real) {
+        window.setTimeout(() => {
+          track.style.transition = 'none';
+          track.style.transform = 'translateY(0)';
+          i = 0;
+        }, 640);
+      }
+    }, 2600);
+  }
+</script>
