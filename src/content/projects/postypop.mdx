@@ -17,7 +17,7 @@ stack:
   - "Cloudflare"
   - "Hostinger Business"
 demoUrl: "https://postypop.app"
-aiAngle: "Platform-specific prompt engineering (character limits, hashtag density, voice) layered on a four-stage fallback chain — Groq Scout → Llama 3.3 70B → Compound → GPT-4o-mini — so output stays consistent regardless of which model executes the request."
+aiAngle: "Platform-specific prompt engineering (character limits, hashtag density, voice) layered on a four-stage fallback chain (Groq Scout → Llama 3.3 70B → Compound → GPT-4o-mini) so output stays consistent regardless of which model executes the request."
 metrics:
   - { label: "Platforms", value: "11" }
   - { label: "Variants per post", value: "22" }
@@ -30,7 +30,7 @@ accent: "#d9a16e"
 
 ## Why I built this
 
-Creators rewrite the same post for LinkedIn, Twitter, Instagram, TikTok, Threads, Bluesky, Pinterest, Mastodon, Discord, YouTube, and Facebook — by hand. Eleven platforms, eleven voices, eleven character limits. The work is real and the LLMs are good enough; nobody had stitched it into a clean product yet.
+Creators rewrite the same post for LinkedIn, Twitter, Instagram, TikTok, Threads, Bluesky, Pinterest, Mastodon, Discord, YouTube, and Facebook, by hand. Eleven platforms, eleven voices, eleven character limits. The work is real and the LLMs are good enough; nobody had stitched it into a clean product yet.
 
 ## How it works
 
@@ -42,10 +42,10 @@ Creators rewrite the same post for LinkedIn, Twitter, Instagram, TikTok, Threads
 
 ## What it took
 
-- A 741-line CLAUDE.md of operational lessons — including the security work: SSRF guards on user-supplied URLs, HMAC webhook verification, constant-time password comparison, parameterized SQL.
+- A 741-line CLAUDE.md of operational lessons, including the security work: SSRF guards on user-supplied URLs, HMAC webhook verification, constant-time password comparison, parameterized SQL.
 - Production deployment on Hostinger Business with a `start.mjs` bootstrap.
 - llms.txt + JSON-LD + OG + sitemap, because launching a SaaS in 2026 means launching for AI crawlers too.
-- Splash animation built with GSAP (logo draws, fills, pops, brand reveal) — a one-time joke that took longer than it should have, and earned its keep.
+- Splash animation built with GSAP (logo draws, fills, pops, brand reveal), a one-time joke that took longer than it should have, and earned its keep.
 
 ## What I learned
 

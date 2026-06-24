@@ -22,7 +22,7 @@ const { title, description, ogImage, pathname } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <SEO title={title} description={description} ogImage={ogImage} pathname={pathname} />
     <script is:inline>
-      // Theme bootstrap — runs before paint.
+      // Theme bootstrap, runs before paint.
       (function () {
         const stored = localStorage.getItem('theme');
         const t = stored || 'dark';

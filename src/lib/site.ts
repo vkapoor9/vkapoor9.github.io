@@ -1,4 +1,4 @@
-// Personal info — replace placeholders before deploying.
+// Personal info, replace placeholders before deploying.
 
 export const site = {
   name: 'VK',
@@ -6,9 +6,9 @@ export const site = {
   initials: 'VK',
   role: 'Applied AI Engineer · AI Solutions Architect',
   tagline:
-    'Builds AI products end-to-end — from model architecture and safety guardrails to payments, voice, and real users.',
+    'Builds AI products end-to-end, from model architecture and safety guardrails to payments, voice, and real users.',
   bio: [
-    'I build AI products. Privacy-first agents, kid-safe educational AI, production SaaS with real customers, on-device voice — every piece shipped, every piece used.',
+    'I build AI products. Privacy-first agents, kid-safe educational AI, production SaaS with real customers, on-device voice, every piece shipped, every piece used.',
     'I work end-to-end: model architecture and safety guardrails through to payments, OAuth, observability, and the unglamorous middle layer that decides whether a real customer stays. The work on this site spans local LLMs on Apple Silicon, multi-agent systems with row-level ACLs, and production websites that real businesses rely on.',
   ],
   location: 'United States',

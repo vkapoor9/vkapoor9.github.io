@@ -4,7 +4,7 @@ import { site, skillGroups } from '../lib/site';
 import CopyEmail from '../components/CopyEmail.tsx';
 ---
 
-<BaseLayout title="About" description={`About ${site.shortName} — ${site.role}.`}>
+<BaseLayout title="About" description={`About ${site.shortName}, ${site.role}.`}>
   <section class="container-x pt-20 sm:pt-28 pb-16">
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-16 items-start">
       <div class="lg:col-span-4 reveal">
@@ -39,7 +39,7 @@ import CopyEmail from '../components/CopyEmail.tsx';
           {site.bio.map((p) => <p>{p}</p>)}
           <p>
             <strong class="text-[var(--color-ink)] font-medium">What I look for in a role.</strong>{' '}
-            Senior IC or first-line management on a team that's actually shipping AI to humans —
+            Senior IC or first-line management on a team that's actually shipping AI to humans , 
             Applied AI Engineering, Solutions Architecture, or AI Engineering leadership. I care
             about the boring middle (auth, payments, eval harnesses, observability) at least as
             much as the model layer, because that's where products live or die.
@@ -93,13 +93,13 @@ import CopyEmail from '../components/CopyEmail.tsx';
         <p>
           <strong class="text-[var(--color-ink)] font-medium">Treat AI like a colleague, not a magic box.</strong>{' '}
           The model layer is one engineer in a much bigger system. Auth, payments, observability,
-          safety guardrails, evals — that's where the real work hides, and where the LLM is at its
+          safety guardrails, evals, that's where the real work hides, and where the LLM is at its
           most useful as a builder.
         </p>
         <p>
           <strong class="text-[var(--color-ink)] font-medium">Privacy and safety aren't features.</strong>{' '}
           They're shapes the architecture has to take from the start. Three-tier safety classes,
-          row-level ACLs, on-device inference where it matters — bolted on later, none of these
+          row-level ACLs, on-device inference where it matters, bolted on later, none of these
           work.
         </p>
         <p>
@@ -131,7 +131,7 @@ import CopyEmail from '../components/CopyEmail.tsx';
           <li><strong class="text-[var(--color-ink)] font-medium">Sonnet 4.6 and Opus 4.7</strong> picked deliberately per task: Sonnet for high-volume work, Opus when the architecture or judgment matters more than the latency.</li>
         </ul>
         <p>
-          The reason I default to Claude isn't loyalty to a brand. It's the model itself, and it's the alignment work that goes around it. Privacy-first agents, kid-safe tutors, three-tier safety guardrails — the projects on this page are built on assumptions Anthropic's research papers explicitly defend. Picking the model that takes those questions seriously is the same call I'd make as a hiring manager picking a team.
+          The reason I default to Claude isn't loyalty to a brand. It's the model itself, and it's the alignment work that goes around it. Privacy-first agents, kid-safe tutors, three-tier safety guardrails, the projects on this page are built on assumptions Anthropic's research papers explicitly defend. Picking the model that takes those questions seriously is the same call I'd make as a hiring manager picking a team.
         </p>
         <p>
           That's why I'm applying.

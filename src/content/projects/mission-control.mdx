@@ -28,21 +28,21 @@ accent: "#d9a16e"
 
 ## Why I built this
 
-Once you ship more than five projects, you stop knowing what state any of them are in. I needed a single pane of glass that could *also reason* — not just "11 commits in the last week" but "the auth migration landed; the next blocker is the rate-limit refactor."
+Once you ship more than five projects, you stop knowing what state any of them are in. I needed a single pane of glass that could *also reason*, not just "11 commits in the last week" but "the auth migration landed; the next blocker is the rate-limit refactor."
 
 ## How it works
 
 - **Project scanner.** Walks `~/AI/Projects`, parses `package.json` / `CLAUDE.md` / git, classifies into six categories.
 - **Kanban per project.** Tasks parsed from the project's own files, plus manual entries. Live updates via TanStack Query.
 - **Daily pulse.** A scheduled Ollama pass at 05:30 reads the project's recent activity and writes a short pulse. The pulses fan out to a Telegram digest by 06:00.
-- **Three-tier separation.** Tier 1 (Jarvis private content) is never observable. Tier 2 (this dashboard) sees only metadata. Tier 3 would be cloud business agents — clean isolation enforced by the data layer.
-- **Infra integrations.** Proxmox VM control, Portainer container ops, TrueNAS API, GitHub webhook receiver — all wired into the same dashboard.
+- **Three-tier separation.** Tier 1 (Jarvis private content) is never observable. Tier 2 (this dashboard) sees only metadata. Tier 3 would be cloud business agents, clean isolation enforced by the data layer.
+- **Infra integrations.** Proxmox VM control, Portainer container ops, TrueNAS API, GitHub webhook receiver, all wired into the same dashboard.
 
 ## What it took
 
 - 4 launchd agents for the daily lifecycle (rescan, ingest, pulse, briefing).
 - A read-only filesystem watcher so the scanner never mutates a project folder.
-- A pulse generation prompt that's been tuned harder than any other prompt I've shipped — short, specific, accurate, with explicit instructions to flag uncertainty.
+- A pulse generation prompt that's been tuned harder than any other prompt I've shipped, short, specific, accurate, with explicit instructions to flag uncertainty.
 
 ## Where it stands
 
