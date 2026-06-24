@@ -34,7 +34,8 @@ portfolio-review-visual.html
 portfolio-review-visual.png
 portfolio-review-visual.pdf
 
-# Local preview/screenshot scratch
-_preview-*.png
-_shot.mjs
-_render-visual.mjs
+# Local preview/screenshot scratch (broad: all underscore-prefixed scratch files)
+_*.png
+_*.mjs
+_*.html
+_*.pdf
