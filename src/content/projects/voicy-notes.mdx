@@ -1,0 +1,41 @@
+---
+title: "VoicyNotesAI"
+tagline: "A macOS notepad for back-to-back meetings. Captures the room, transcribes on-device, writes the clean version."
+category: "Tool"
+role: "Architect, sole engineer"
+year: "2026"
+status: "Prototype"
+stack:
+  - "Swift 6 (strict concurrency)"
+  - "SwiftUI + AppKit"
+  - "Core Audio process taps"
+  - "Apple SpeechAnalyzer"
+  - "Parakeet (Core ML) / WhisperKit"
+  - "NLEmbedding"
+  - "EventKit"
+  - "Anthropic API (optional)"
+aiAngle: "Transcribes locally by default with on-device engines, then fuses your rough notes with the transcript into a clean document, using on-device Foundation Models or Claude if you bring your own key. Nothing leaves the Mac unless you opt into a cloud engine."
+metrics:
+  - { label: "Transcription engines", value: "4" }
+  - { label: "AI backends", value: "On-device + Claude" }
+  - { label: "Audio", value: "Never hits disk" }
+  - { label: "Concurrency", value: "Swift 6 strict" }
+featured: false
+order: 130
+accent: "#a78bfa"
+---
+
+## Why I built this
+
+Meeting notes are two problems wearing one coat: catching what was said, and turning your shorthand into something you'd actually send. I wanted both, without uploading a room full of audio to someone else's server.
+
+## How it works
+
+- **Captures the room.** Core Audio process taps grab system audio, AVAudioEngine grabs the mic, and the two mix in memory. The audio streams to the transcriber and is discarded. No file is ever written.
+- **Four transcription engines.** Apple SpeechAnalyzer is the zero-setup default. Parakeet and WhisperKit run on-device after a one-time model download. Deepgram is there as an explicit cloud option.
+- **Two ways to clean up.** When the meeting ends, it fuses your typed notes with the transcript. On-device Foundation Models do it with nothing leaving the Mac, or you point it at Claude with your own API key (kept in the Keychain) for a stronger pass.
+- **Ask across meetings.** A local `NLEmbedding` index plus keyword search answers questions over past notes, with no network call.
+
+## The honest version
+
+Built and working on macOS, Debug and Release both build clean, tests pass, and it's in private use. Claude is optional and off by default; the whole pipeline runs locally unless you choose otherwise. It's deliberately not sandboxed (Core Audio taps need that), and it isn't publicly distributed yet.

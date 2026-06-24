@@ -1,0 +1,42 @@
+---
+title: "Personal AI"
+tagline: "An on-device iOS vault for personal info. Ask by voice or camera, answered locally, nothing leaves the phone."
+category: "Mobile"
+role: "Architect, sole engineer"
+year: "2026"
+status: "Beta"
+stack:
+  - "Swift 6"
+  - "SwiftUI"
+  - "iOS 26+ (Apple Silicon)"
+  - "Foundation Models (on-device)"
+  - "VisionKit + Vision OCR"
+  - "SwiftData + CloudKit (E2E)"
+  - "App Intents (Siri)"
+  - "Face ID"
+aiAngle: "A ~3B-parameter Foundation Models LLM runs entirely on the phone: it reads documents from the camera, extracts structured fields, and answers natural-language questions. No third-party API, no cloud inference, no per-query cost."
+metrics:
+  - { label: "Inference", value: "100% on-device" }
+  - { label: "Fact types", value: "15 categories" }
+  - { label: "Distribution", value: "TestFlight build 11" }
+  - { label: "Targets", value: "App + widget + ext" }
+featured: true
+order: 45
+accent: "#60a5fa"
+---
+
+## Why I built this
+
+The information you need at the worst possible moment, the policy number at the body shop, the group ID at the pharmacy, the VIN when you're on the phone with the dealer, is scattered across apps, emails, and glove boxes. I wanted one place that knows it, answers in plain language, and never sends a byte to anyone else.
+
+## How it works
+
+- **Capture by camera.** VisionKit scans a document, Vision runs OCR, and a Foundation Models `@Generable` type pulls structured fields. Multi-row docs come back as a batch you review before saving.
+- **Ask by voice.** App Intents register the assistant with Siri, so "what's my auto policy number" works hands-free.
+- **Local answers.** Every stored fact feeds the on-device model as context, and an `NLEmbedding` semantic search pulls the relevant neighbors. Streamed responses render Markdown tables for multi-field answers.
+- **Encrypted and synced.** SwiftData plus a CloudKit private database with end-to-end encryption keeps everything on your own devices. A v2 adds family sharing through `CKShare` with no schema change.
+- **Locked down.** Face ID on launch, a short background timeout, encrypted fields, and a JSON export for your own backups.
+
+## The honest version
+
+It's on TestFlight Internal (build 11), single-user for now, iOS only, and it needs an Apple Intelligence device. No third-party LLM is involved anywhere. That's the whole point: the most private data you own never leaves the phone.

@@ -1,0 +1,38 @@
+---
+title: "Xenofall"
+tagline: "A browser first-person shooter in real-time 3D. Seven missions, nine weapons, a live-synthesized soundtrack, zero media files."
+category: "Game"
+role: "Sole maker"
+year: "2026"
+status: "Live"
+stack:
+  - "Three.js (r184, vendored)"
+  - "Vanilla ES modules"
+  - "WebAudio (procedural)"
+  - "Canvas2D textures"
+  - "Playwright smoke tests"
+aiAngle: "Built the way I build systems: collision math, enemy AI, and objective logic are unit-tested in isolation before they ever touch the renderer. The interesting constraint was zero assets, so every sound, texture, and the adaptive music is generated at runtime."
+metrics:
+  - { label: "Missions", value: "7" }
+  - { label: "Weapons", value: "9 + 3 power-ups" }
+  - { label: "Tests", value: "194 assertions" }
+  - { label: "Assets", value: "0 (procedural)" }
+featured: false
+order: 185
+accent: "#f43f5e"
+---
+
+## What it is
+
+A Doom-style alien shooter that runs in a browser tab. Three.js does the 3D (vendored, no build step, works offline). You fight through seven story missions aboard a colony ship, each with its own biome, lighting, and fog, up to a boss arena against the Hive Queen.
+
+## How it works
+
+- **Real-time 3D.** An EffectComposer pipeline with bloom and ACES tone mapping; per-level themes drive palette, fog, and lighting across seven distinct looks.
+- **Real movement.** Gravity, double-jump, jump pads, and damaging pits. The verticality is actual math in the logic layer, not a visual trick.
+- **Everything synthesized.** Weapon fire, impacts, enemy snarls, explosions, and the adaptive music are all generated live with WebAudio oscillators and filters. Wall textures are drawn procedurally on a canvas. No mp3, no wav, no image files.
+- **Tested first.** Geometry, collision, damage, objectives, save/load, and all the enemy AI types are covered by 194 unit assertions, with a Playwright headless run exercising the full mission, boss, death, and pause paths.
+
+## What's real about it
+
+Single-player, client-side save, live and playable. The point of it is the engineering: a tested 3D game with no external dependencies at runtime.

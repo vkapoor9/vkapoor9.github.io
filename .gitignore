@@ -26,3 +26,14 @@ Thumbs.db
 # Claude Code session memory (kept local, not pushed to public repo)
 CLAUDE.md
 .claude/
+
+# Internal planning docs (contain PII / pricing / business notes - never publish)
+PORTFOLIO-EXPANSION-RECOMMENDATIONS.md
+portfolio-review-visual.html
+portfolio-review-visual.png
+portfolio-review-visual.pdf
+
+# Local preview/screenshot scratch
+_preview-*.png
+_shot.mjs
+_render-visual.mjs

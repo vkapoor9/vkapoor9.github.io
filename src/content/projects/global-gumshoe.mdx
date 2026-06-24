@@ -1,0 +1,39 @@
+---
+title: "Global Gumshoe"
+tagline: "A procedural geography-detective game. Chase eight villains across 57 cities, one solvable case at a time."
+category: "Game"
+role: "Sole maker"
+year: "2026"
+status: "Live"
+stack:
+  - "React 18"
+  - "TypeScript 5"
+  - "Vite 5"
+  - "Tailwind CSS"
+  - "Framer Motion"
+  - "Pure-functional game engine"
+aiAngle: "The whole game is a deterministic engine wrapped in tests. A headless smoke test plays randomized cases across all four regions and three difficulties, asserting every generated trail is valid and every case is solvable. No magic, all invariants checked."
+metrics:
+  - { label: "Regions", value: "4 (57 cities)" }
+  - { label: "Villains", value: "8 unique" }
+  - { label: "Bundle", value: "65 KB gzipped" }
+  - { label: "Tests", value: "3,300+ assertions" }
+featured: false
+order: 186
+accent: "#22d3ee"
+---
+
+## What it is
+
+A modern, all-original tribute to the geography-detective games I grew up with. You get a case, a five-to-seven city trail, and a seven-day deadline. Interview witnesses at the embassy, library, and bank to collect geographic and suspect clues, narrow the dossier to one villain, issue a warrant, and arrive in the right city to make the arrest.
+
+## How it works
+
+- **Procedural cases.** A generator builds the trail, places clues (geographic plus suspect features), and guarantees exactly one matching villain, so a case is always solvable once the clues are gathered.
+- **Pure-functional engine.** Case generation, clue matching, and arrest logic are deterministic and live separately from the React UI. State stays in React, no extra store.
+- **Proven solvable.** A headless smoke test plays randomized cases across all four regions and three difficulty tiers, asserting trail validity and clue logic across thousands of checks.
+- **Light and fast.** React, TypeScript, and Vite compiled to a 65 KB gzipped bundle, responsive down to an iPhone home-screen PWA.
+
+## What's real about it
+
+Every character and the lore are original; the mechanics are the tribute. Single-player, local save, live and playable. The interesting part is that the engine proves its own fairness on every build.

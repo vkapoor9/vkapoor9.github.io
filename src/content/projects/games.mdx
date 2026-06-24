@@ -1,21 +1,42 @@
 ---
-title: "Games & Experiments"
-tagline: "Interactive prototypes — the place I use to learn things that don't fit in product code."
+title: "Games Arcade"
+tagline: "A 22-game browser arcade with shared infrastructure, plus two standouts that grew into their own builds."
 category: "Game"
 role: "Sole maker"
 year: "2026"
-status: "Prototype"
+status: "Live"
 stack:
-  - "HTML / Canvas"
-  - "WebGL"
-  - "TypeScript"
-aiAngle: "AI is the co-builder. Game design has tighter feedback loops than backend systems — a prototype either *feels right* in five seconds or doesn't — which makes it a great rehearsal space for working iteratively with an LLM."
-featured: false
-order: 180
+  - "HTML5 Canvas"
+  - "Three.js (vendored)"
+  - "React + Vite + TypeScript"
+  - "WebAudio"
+  - "Node static server"
+aiAngle: "AI as co-builder. Game design has the tightest feedback loop there is, a prototype either feels right in five seconds or it doesn't, which makes it the most honest place to practice building iteratively with an LLM."
+metrics:
+  - { label: "Games", value: "22 playable" }
+  - { label: "Categories", value: "5" }
+  - { label: "Standouts", value: "FPS + detective" }
+  - { label: "External CDNs", value: "0" }
+featured: true
+order: 60
+accent: "#f0abfc"
 ---
 
 ## What it is
 
-A folder of interactive experiments — small games, physics toys, generative pieces. Most are throwaway; a couple keep getting opened months after they shipped.
+A single launcher fronting 22 finished, playable games across five categories: action, puzzle, racing, kids, and a couple of bigger originals. Shared infrastructure sits underneath: a common UI, an idle-guard that saves state and returns to the arcade after ten minutes of inactivity, and a zero-dependency Node server. Everything is vendored locally, no external CDNs.
 
-I include them because the discipline of "is this actually fun to use" maps directly onto the discipline of "is this actually useful to a customer." The smaller the prototype, the more honestly the question gets answered.
+It started as a rehearsal space. Game design answers "is this actually good to use" in seconds, which is the same question I ask on every product, just with a faster loop. Two of them grew big enough to earn their own entries:
+
+- **Xenofall**, a real-time 3D first-person shooter built on Three.js with a fully synthesized soundtrack.
+- **Global Gumshoe**, a procedural geography-detective game whose engine proves its own cases are solvable on every build.
+
+## What's underneath
+
+- **Shared launcher and idle-guard.** One UI mounts every game; the idle-guard saves progress and unmounts after inactivity so a device never gets stuck in a single game.
+- **Lazy loading.** Only one game is in memory at a time; navigating back frees it.
+- **Local-only assets.** No external CDNs at runtime. Three.js and everything else is vendored.
+
+## What's real about it
+
+The arcade is live and publicly playable, auto-deployed from source. The engineering underneath is the part I'd point at: shared infrastructure, local-only assets at runtime, and real test suites on the two big titles. Not a folder of one-offs.

@@ -1,0 +1,41 @@
+---
+title: "Local-Service AI Suite"
+tagline: "Three tools that recover revenue for local service businesses: catch the lead, manage the reputation, revive the database."
+category: "AI Agent"
+role: "Sole maker"
+year: "2026"
+status: "Prototype"
+stack:
+  - "Node.js (zero-dependency HTTP)"
+  - "Vanilla JS dashboards"
+  - "JSON file store"
+  - "Deterministic conversation engines"
+  - "Optional LLM (OpenAI / local MLX)"
+aiAngle: "Each tool runs a deterministic state machine on the critical path, capture, qualify, route, book, so it works with zero API keys. An optional LLM layers natural-sounding prose on top without ever owning the business logic."
+metrics:
+  - { label: "Tools", value: "3" }
+  - { label: "Runs with", value: "0 API keys" }
+  - { label: "Dependencies", value: "Zero npm" }
+  - { label: "Backends", value: "Rules + LLM" }
+featured: false
+order: 110
+accent: "#f59e0b"
+---
+
+## What it is
+
+Three small servers, one idea: most local service businesses lose money in the gaps, not the jobs. Each tool closes one gap.
+
+- **Sub60** answers every missed call and web lead in seconds, qualifies the job one question at a time, and books it.
+- **ReviewPilot** drafts a response to every review tuned to its rating (grateful for fives, empathetic and offline for ones, honest for threes) and runs campaigns to earn new ones.
+- **ReviveAI** works the dormant database, opening with a segment-specific message (past customer, cold lead, abandoned quote) and walking a reply toward a rebooking.
+
+## How it works
+
+- **Deterministic by default.** The conversation core is a plain state machine, so the demo runs fully without an API key. That makes it reliable and easy to reason about.
+- **LLM as a layer, not a crutch.** Set one environment variable and OpenAI, or a local MLX server, rewrites the prose to feel human. The booking and routing logic never moves into the model.
+- **Zero-dependency stack.** Each tool is a Node HTTP server with a JSON store and a vanilla-JS dashboard that seeds realistic demo data on first run.
+
+## Why it's here
+
+This is the part of "applied AI" that isn't the model. Deciding where a deterministic rule is safer than a generation, and where the LLM actually earns its place, is most of the job. These are working prototypes, not a hosted product.

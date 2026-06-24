@@ -1,0 +1,39 @@
+---
+title: "Dark Mode (Cross-Browser)"
+tagline: "One adaptive dark-mode engine, shipped twice: a Safari Web Extension and a Chrome Manifest V3 extension."
+category: "Tool"
+role: "Sole engineer"
+year: "2026"
+status: "Prototype"
+stack:
+  - "TypeScript"
+  - "Manifest V3"
+  - "Vite + Vitest (Chrome)"
+  - "Safari Web Extension + Xcode container"
+  - "MutationObserver"
+  - "Browser sync storage"
+aiAngle: "No model here, on purpose. It's a deterministic color engine, HSL transforms with a luminance heuristic that skips sites already shipping their own dark theme, injected at document_start so pages never flash white first."
+metrics:
+  - { label: "Browsers", value: "Safari + Chrome" }
+  - { label: "Tests", value: "24 passing (Safari)" }
+  - { label: "Engine", value: "HSL transforms" }
+  - { label: "Inject", value: "document_start" }
+featured: false
+order: 160
+accent: "#818cf8"
+---
+
+## What it is
+
+A dark mode that works everywhere, built as two parallel Manifest V3 extensions sharing one approach. The Chrome build is TypeScript compiled with Vite; the Safari build wraps the same idea in a macOS app container.
+
+## How it works
+
+- **No flash.** The content script injects at `document_start`, so pages come up dark instead of flashing white first.
+- **A real color engine.** Hex, rgb, and hsl inputs are parsed and shifted along lightness and saturation curves, preserving opacity and batching DOM writes to avoid reflow thrash.
+- **Don't double-darken.** A luminance heuristic detects sites that already ship a dark theme and leaves them alone. Per-site overrides let you force light or dark anywhere.
+- **Stays put.** Settings persist through the browser's sync storage, and a `MutationObserver` re-applies the theme to content that loads after the page.
+
+## The honest version
+
+Both build and run, and the Safari extension's 24 tests pass. Neither is on a store yet (Safari needs a one-time Developer ID signing step). It's a tooling project, not a product, and a clean look at solving the same problem twice under two very different extension models.
