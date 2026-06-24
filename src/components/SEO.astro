@@ -12,7 +12,7 @@ const { title, description, ogImage, pathname } = Astro.props;
 const fullTitle = title ? `${title} · ${site.shortName}` : `${site.shortName}, ${site.role}`;
 const desc = description ?? site.tagline;
 const url = pathname ? new URL(pathname, Astro.site).toString() : Astro.url.toString();
-const og = ogImage ?? '/og-default.png';
+const og = new URL(ogImage ?? '/og-default.png', Astro.site).toString();
 ---
 
 <title>{fullTitle}</title>
