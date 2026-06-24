@@ -61,7 +61,7 @@ export const cloud = {
     },
     {
       title: 'Cost optimization (FinOps)',
-      body: 'Cost Explorer, Budgets, Trusted Advisor, Reserved Instances and Savings Plans. Replaced licensed software with a custom mobile app, cutting six figures a year in licensing costs.',
+      body: 'Led a FinOps initiative on a state government cloud migration that cut compute spend roughly 50%, about $760K a year, through EC2/RDS right-sizing, Savings Plans, and Cost Explorer dashboards. A separate custom mobile app replaced licensed software for another $300K a year. Tooling: Cost Explorer, Budgets, Trusted Advisor, Savings Plans.',
     },
   ],
 } as const;
