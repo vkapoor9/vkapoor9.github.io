@@ -1,6 +1,6 @@
-# VK - Applied AI Engineer
+# VK - Applied AI Solutions Architect
 
-> Portfolio for Applied AI Engineering, AI Solutions Architecture, and Engineering leadership roles. Fifteen shipped projects across SaaS, AI agents, educational AI, dashboards, and mobile.
+> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional). Nineteen shipped projects across SaaS, AI agents, educational AI, dashboards, games, and mobile.
 
 ## Featured projects
 
