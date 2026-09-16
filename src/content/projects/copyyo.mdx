@@ -1,0 +1,44 @@
+---
+title: "CopyYo"
+tagline: "A native macOS clipboard manager that lives in the menu bar and appears as a glass shelf on a keystroke."
+category: "Tool"
+role: "Designer & sole engineer"
+year: "2026"
+status: "Beta"
+stack:
+  - "Swift"
+  - "SwiftUI in AppKit"
+  - "SwiftData"
+  - "Xcode 26"
+  - "Mac App Store"
+aiAngle: "No model in the product. It is here because shipping a native macOS app through App Store review is a different engineering discipline from shipping a web service, and the portfolio would be dishonest without one example of it."
+metrics:
+  - { label: "Swift files", value: "52" }
+  - { label: "Lines", value: "~3,900" }
+  - { label: "Data collected", value: "None" }
+  - { label: "Store status", value: "In review" }
+featured: false
+order: 200
+accent: "#8ecfd9"
+---
+
+## Why I built this
+
+Every clipboard manager on macOS is either ugly, subscription-priced, or quietly syncing your clipboard history to someone's server. A clipboard holds passwords, addresses and half-written messages. It should stay on the machine.
+
+## How it works
+
+- **Menu bar resident.** No dock icon, no window management, out of the way until called.
+- **Glass shelf on a keystroke.** Shift-Command-V brings up the history as a shelf rather than a list in a window.
+- **SwiftData for history**, stored locally. The App Privacy declaration is "Data Not Collected", and it is accurate.
+- **SwiftUI inside AppKit windows**, because the panel behavior a shelf needs is still an AppKit job.
+
+## What it took
+
+52 Swift files and about 3,900 lines, and then the part nobody warns you about: App Store review. The build that gets submitted cannot be run locally at all, because Gatekeeper rejects an Apple Distribution signature and the profile provisions no devices, so verifying the literal shipping binary means going through TestFlight for macOS. That single fact cost more hours than any feature in the app.
+
+Submission is in flight. The current round is an information request from review rather than a defect, answered with a written reply and a demo video.
+
+## What I learned
+
+The engineering is the easy half of shipping a native app. The other half is signing, entitlements, provisioning, privacy declarations, trader status and review correspondence, none of which is visible in the product and all of which will stop it reaching a user.

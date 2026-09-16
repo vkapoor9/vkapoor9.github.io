@@ -1,0 +1,45 @@
+---
+title: "Video Pipeline"
+tagline: "Drop raw footage in a folder. Get a cut, graded, captioned, encoded film out, stopping once for a human yes."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Beta"
+stack:
+  - "Python"
+  - "FFmpeg"
+  - "Whisper transcription"
+  - "Anthropic Claude"
+  - "Watchfolder automation"
+aiAngle: "The model does not touch pixels. It reads the transcript and decides what the film is about, which sentences earn their place and which are throat-clearing, then hands a cut list to deterministic tooling. Reasoning over text, rendering over code, and no generative video anywhere in the path."
+metrics:
+  - { label: "Phase 1", value: "Complete" }
+  - { label: "Human gates", value: "1" }
+  - { label: "Frame check", value: "6s" }
+  - { label: "Defect ledger", value: "Gated" }
+featured: false
+order: 130
+accent: "#d98e8e"
+---
+
+## Why I built this
+
+Editing is where content pipelines die. Everything upstream can be automated and then a human sits for four hours moving clips around. The bet was that the judgment in an edit lives in the words, and the words are text, and text is the one thing a model is genuinely good at.
+
+## How it works
+
+A file lands in a watched folder and the pipeline takes it from there: pick it up, transcribe it, classify what kind of piece it is, route it to a preset for that type, cut it, grade it, caption it, score the result, encode it. It stops exactly once, at a human approval gate, and then finishes the job. Two commands, or one watcher and none.
+
+Captions are word-timed rather than line-timed, which is the difference between subtitles and something that feels authored.
+
+## What it took
+
+The part I would keep in any rewrite is a file called `PIPELINE-LEARNINGS.md`. It is a defect ledger: every fault that ever reached a delivered file, the evidence that caught it, and the automated gate that now prevents it. A row is only closed when a script fails on the defect and passes on the fix, and both directions have been demonstrated. "I added a check" does not close anything.
+
+That discipline came from a real failure. Two early cuts shipped with audio defects (words clipped at boundaries, no tail padding) that nobody noticed until the files were already out. Both are now gates.
+
+The other thing that paid for itself immediately was a six-second frame snapshot tool, replacing a four-minute re-render every time I wanted to see whether a single grade looked right.
+
+## What I learned
+
+Automating the taste out of editing is not possible and was never the goal. Automating the ninety percent that is mechanical, so the human judgment lands in one concentrated decision instead of being diluted across four hours of scrubbing, is very possible.

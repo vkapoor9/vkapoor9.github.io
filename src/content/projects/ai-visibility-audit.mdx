@@ -1,0 +1,47 @@
+---
+title: "AI Visibility Audit"
+tagline: "Measures whether AI assistants recommend a business, or its competitors. Zero runtime dependencies, sellable report out the other end."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Shipped"
+stack:
+  - "Node.js 20+"
+  - "Zero runtime dependencies"
+  - "OpenAI API"
+  - "Anthropic API"
+  - "Perplexity API"
+  - "JSON-LD / Schema.org"
+aiAngle: "Search optimization assumed a ranked list of links. Assistants return one answer, so the measurable question changed from 'where do we rank' to 'are we the answer'. The probe asks buyer-intent questions across three assistants and scores mention share against named competitors, which turns an anxiety into a number."
+metrics:
+  - { label: "Tests", value: "40/40" }
+  - { label: "Runtime deps", value: "0" }
+  - { label: "Crawlers checked", value: "8" }
+  - { label: "Probe questions", value: "8-12" }
+featured: false
+order: 120
+accent: "#c98ed9"
+---
+
+## Why I built this
+
+Buyers stopped typing keywords into a search box and started asking an assistant for a recommendation. A business can rank perfectly and still never be named. There was no way to check, so every conversation about it was conjecture.
+
+## How it works
+
+Two engines, deliberately independent.
+
+- **Structural scanner.** Real network checks: robots.txt rules for eight AI crawlers, llms.txt, JSON-LD (LocalBusiness, Organization, FAQPage, Review), head hygiene, sitemap, FAQ and name/address/phone signals, HTTPS and response health. Runs with no API keys at all.
+- **AI engine probe.** Asks 8 to 12 buyer-intent questions ("best plumber in [town]") across ChatGPT, Claude and Perplexity, then measures how often the business and its named competitors come back. Needs keys, and skips cleanly without them rather than failing.
+- **Batch mode.** Scans a CSV of prospects and returns a ranked list with factual opener lines drawn from what the scan actually found.
+- **Output.** One self-contained HTML report.
+
+## What it took
+
+Zero runtime dependencies was a constraint I set on purpose and kept. It runs on a clean Node install with no lockfile drift, no install step, and nothing in the tree that I did not write. For a tool whose entire value is the credibility of its findings, a transitive dependency I have not read is a liability rather than a convenience.
+
+Every check is a real request. Nothing is inferred from a cached third-party index, because an aggregator that lags by a month will confidently report a robots.txt rule that changed last week.
+
+## What I learned
+
+The hard part was not the probing. It was accepting that a claim made to a business about its own website is checkable by that business in about four seconds, so a false positive costs more than the entire report is worth. The test suite exists to protect against being confidently wrong in front of someone who knows better.

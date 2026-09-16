@@ -1,0 +1,44 @@
+---
+title: "Organizee"
+tagline: "Point it at a messy folder. See exactly what it will do, then let it do it, then undo it if you disagree."
+category: "Tool"
+role: "Designer & sole engineer"
+year: "2026"
+status: "Shipped"
+stack:
+  - "Swift"
+  - "SwiftUI"
+  - "macOS 14+"
+  - "Drag and drop"
+aiAngle: "Deliberately no model. Sorting files by type is a solved problem that rules handle perfectly, and reaching for an LLM here would add latency, cost and non-determinism to a task where a user needs the same input to produce the same output every time."
+metrics:
+  - { label: "Preview first", value: "Always" }
+  - { label: "Undo", value: "Full" }
+  - { label: "Duplicate detection", value: "Yes" }
+  - { label: "Custom rules", value: "Yes" }
+featured: false
+order: 210
+accent: "#b4d98e"
+---
+
+## Why I built this
+
+The Downloads folder problem. Every automatic organizer I tried moved files somewhere I could not predict and gave me no way back, which is why I stopped using all of them within a day.
+
+## How it works
+
+- **Preview before it commits.** You see the exact plan, file by file, before anything moves.
+- **Undo any operation.** The one feature that makes it safe to actually use.
+- **Smart categorization** by type (documents, images, video, audio, code) with custom extension-to-folder rules when the defaults are wrong.
+- **Duplicate detection** across the target tree.
+- **Drag and drop** onto the window or the dock icon.
+
+## What it took
+
+The interesting constraint was making every operation reversible. That is easy if you copy everything and expensive in disk, or cheap and hard if you track moves precisely enough to walk them backwards. It tracks the moves.
+
+The interface is a glassmorphic dark UI with a mascot, which is not a technical achievement but did make a file-management utility something I wanted to open.
+
+## What I learned
+
+For a destructive operation on someone's files, trust is the entire product. Preview and undo are not polish, they are the reason anyone runs it a second time.

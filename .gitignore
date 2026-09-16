@@ -39,3 +39,9 @@ _*.png
 _*.mjs
 _*.html
 _*.pdf
+
+# Draft resume PDF (employer + contact PII)
+VK Kapoor - Combined Resume*.pdf
+
+# Session handoff docs (business notes, employer/brand refs, PII)
+_handoff-*/

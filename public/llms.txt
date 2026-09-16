@@ -1,22 +1,40 @@
 # VK - Applied AI Solutions Architect
 
-> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional). Nineteen shipped projects across SaaS, AI agents, educational AI, dashboards, games, and mobile.
+> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional), AWS Security Specialty. 27 documented projects across SaaS, AI agents, native macOS and iOS apps, developer tools, dashboards, educational AI, and games.
 
 ## Featured projects
 
-- [Jarvis V5](/projects/jarvis-v5): Privacy-first multi-agent family AI. Three-tier safety, family ACL, pgvector long-term memory, 23+ tools, voice + Telegram + web.
-- [PostyPop](/projects/postypop): Live SaaS that turns one piece of content into 22 platform-tuned variations. Multi-model fallback (Groq, Llama, Compound, GPT-4o), Lemon Squeezy payments, approved Chrome extension.
-- [KidsAI Buddy](/projects/kidsai-buddy): Kid-safe educational AI used daily by seven kids. Local Ollama, local Kokoro TTS, four-layer safety pipeline, gamification, parent admin.
-- [Jarvis Mac](/projects/jarvis-mac): Fully local voice assistant on Apple Silicon. mlx-lm Gemma 3.1, speculative decoding, per-session prompt cache, acoustic pronunciation learning, on-device RAG.
-- [Mission Control](/projects/mission-control): Homelab dashboard that watches 50 projects and writes daily LLM-summarized pulses. Tier 2 observability, 4 launchd agents, Telegram delivery.
-- [Lead Engine](/projects/lead-engine): End-to-end lead pipeline. FastAPI + SQLite dashboard, Claude-powered website audits, Resend cold outreach with per-lead preview redesigns, Telegram engagement alerts, scheduled LaunchAgent follow-ups.
-- [Prerna Kapoor](/projects/prerna-kapoor): Full WordPress site for a Colorado realtor with three Claude-powered AI workflows: a site chatbot, a backend listing-creation bot, and a scheduled autopublishing blog pipeline. Bilingual (EN / JP). Paid client.
+- [Jarvis Mac](/projects/jarvis-mac): A fully local voice assistant on Apple Silicon, streaming pipeline, speculative decoding, on-device RAG. Status: Live.
+- [Realtor Buddy](/projects/realtor-buddy): A voice-first field app for agents who work from the driver's seat. Native Swift, 446 tests, CarPlay-bound. Status: Beta.
+- [PostyPop](/projects/postypop): One piece of content → 22 platform-tuned variations in seconds. Live SaaS, real customers. Status: Live.
+- [iCloud MCP](/projects/icloud-mcp): A self-built MCP server that gives an AI assistant gated access to mail, calendar and contacts. 285 tests, 33 tools, in daily use. Status: Live.
+- [VoicyNotesAI](/projects/voicy-notes): A macOS notepad for back-to-back meetings. Captures the room, transcribes on-device, writes the clean version. Status: Shipped.
+- [KidsAI Buddy](/projects/kidsai-buddy): Kid-safe AI tutor used daily by seven kids, fully local inference, fully local TTS. Status: Live.
+- [Lead Engine](/projects/lead-engine): End-to-end lead pipeline: prospect, audit, generate a preview redesign, send a personalized cold email, track every open and click. Status: Live.
+- [Prerna Kapoor, Colorado Realtor](/projects/prerna-kapoor): Full website plus a self-running AI content and listings pipeline for a working real-estate practice. Status: Live.
+- [Games Arcade](/projects/games): A 22-game browser arcade with shared infrastructure, plus two standouts that grew into their own builds. Status: Live.
 
 ## Other work
 
-- [Foundation Implants](/projects/foundation-implants): 40-page premium WordPress redesign for a Colorado periodontics practice. Paid commercial engagement.
-- [Expense Tracker](/projects/expense-tracker): Mobile-first PWA used daily by my mother in India.
-- [Market Pulse](/projects/market-pulse): Daily 7-tab market intelligence dashboard with scheduled LLM aggregation.
-- [Markdown App (Codex)](/projects/markdown-app): Premium SwiftUI markdown reader for macOS, iPad, iOS.
-- [Crypto Portfolio](/projects/crypto-portfolio): Multi-exchange P&L viewer (trading bots retired 2026-04-19).
-- [Games & Experiments](/projects/games): Interactive prototypes.
+- [Foundation Implants & Periodontics](/projects/foundation-implants): Premium 40-page WordPress redesign for a Colorado periodontics practice. Status: Shipped.
+- [Mission Control](/projects/mission-control): A homelab dashboard that watches 50 projects and writes me a daily LLM-summarized briefing. Status: Beta.
+- [AI Visibility Audit](/projects/ai-visibility-audit): Measures whether AI assistants recommend a business, or its competitors. Zero runtime dependencies, sellable report out the other end. Status: Shipped.
+- [Video Pipeline](/projects/video-pipeline): Drop raw footage in a folder. Get a cut, graded, captioned, encoded film out, stopping once for a human yes. Status: Beta.
+- [LocalLLM Fit](/projects/local-llm-fit): Tells you which local model your machine can actually run, and shows the memory arithmetic instead of asserting it. Status: Live.
+- [Expense Tracker](/projects/expense-tracker): A mobile-first PWA my mother uses every day in India. Status: Live.
+- [Jarvis V5](/projects/jarvis-v5): A privacy-first family AI agent that runs on my own hardware. Status: Live.
+- [Local-Service AI Suite](/projects/local-service-ai): Three tools that recover revenue for local service businesses: catch the lead, manage the reputation, revive the database. Status: Prototype.
+- [Market Pulse](/projects/market-pulse): Daily market intelligence dashboard, seven tabs, one scheduled LLM aggregation pipeline. Status: Prototype.
+- [Porchlight CRM](/projects/porchlight-crm): A local-first CRM for a single real estate agent, where the contact data is cleaned by hand and owned outright. Status: Active.
+- [CopyYo](/projects/copyyo): A native macOS clipboard manager that lives in the menu bar and appears as a glass shelf on a keystroke. Status: Beta.
+- [Organizee](/projects/organizee): Point it at a messy folder. See exactly what it will do, then let it do it, then undo it if you disagree. Status: Shipped.
+- [Personal AI](/projects/personal-ai): An on-device iOS vault for personal info. Ask by voice or camera, answered locally, nothing leaves the phone. Status: Prototype.
+- [Crypto Portfolio](/projects/crypto-portfolio): Multi-exchange P&L viewer, and the post-mortem on a retired trading-bot experiment. Status: Prototype.
+- [Global Gumshoe](/projects/global-gumshoe): A procedural geography-detective game. Chase eight villains across 57 cities, one solvable case at a time. Status: Live.
+- [Xenofall](/projects/xenofall): A browser first-person shooter in real-time 3D. Seven missions, nine weapons, a live-synthesized soundtrack, zero media files. Status: Live.
+- [Markdown App](/projects/markdown-app): A native macOS markdown editor with live preview, mermaid diagrams, and syntax highlighting. Status: Prototype.
+- [Dark Mode (Cross-Browser)](/projects/dark-mode): One adaptive dark-mode engine, shipped twice: a Safari Web Extension and a Chrome Manifest V3 extension. Status: Prototype.
+
+## Contact
+
+Email: vkapoor09@gmail.com

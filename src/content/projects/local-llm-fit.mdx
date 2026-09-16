@@ -1,0 +1,43 @@
+---
+title: "LocalLLM Fit"
+tagline: "Tells you which local model your machine can actually run, and shows the memory arithmetic instead of asserting it."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Vanilla JS"
+  - "No build step"
+  - "No backend"
+  - "Playwright"
+  - "Ollama registry data"
+  - "Hugging Face API"
+aiAngle: "Model selection advice is usually vibes ('8B runs fine on a Mac'). This computes it: parameter count, quantization, KV cache and context length against real available memory, and shows the working so a user can disagree with the arithmetic rather than trust the verdict."
+metrics:
+  - { label: "Tests", value: "191" }
+  - { label: "With server", value: "212" }
+  - { label: "Suites", value: "7" }
+  - { label: "Backend", value: "None" }
+featured: false
+order: 140
+accent: "#9ed98e"
+---
+
+## Why I built this
+
+Every "best local LLM" guide answers a different question than the one people have. The real question is not which model is best, it is which model will load and stay usable on the machine already sitting on the desk. That answer is arithmetic, and nobody was showing it.
+
+## How it works
+
+- **One input, one recommendation.** Describe the hardware, get a top pick and a runner-up.
+- **The arithmetic is visible.** Weights at a given quantization, plus KV cache at a given context length, against real available memory. Shown, not asserted, so a user who knows their machine better can argue with a number.
+- **Static and backend-free.** No server, no accounts, no telemetry. It is a page.
+- **Data refresh.** A script rebuilds the local catalogue from the Ollama model map and a Hugging Face snapshot, so the recommendations track what actually exists.
+
+## What it took
+
+Seven test suites and 191 tests, with 212 when a server is running for the responsive checks. The detail I am most pleased with is a failure mode rather than a feature: if the responsive suite cannot reach a server it does not quietly skip and print a green tick, it fails the run with a non-zero exit. A test suite that reports success when it did not test anything is worse than having no suite, because it actively tells you the wrong thing.
+
+## What I learned
+
+Building something for an audience that can check your work changes the standard. People running local models know their hardware and will notice an optimistic memory estimate immediately. Getting it right was less about the interface than about refusing to round in my own favor.

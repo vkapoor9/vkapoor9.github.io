@@ -1,0 +1,45 @@
+---
+title: "Porchlight CRM"
+tagline: "A local-first CRM for a single real estate agent, where the contact data is cleaned by hand and owned outright."
+category: "Dashboard"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Active"
+stack:
+  - "Node.js"
+  - "SQLite"
+  - "Vanilla JS"
+  - "Resend"
+  - "launchd backups"
+  - "Runs on localhost"
+aiAngle: "The interesting work was reconstruction, not chat. Years of contacts had drifted into duplicates, married-name changes and split households. The cleanup pass rebuilds households, preserves the original name as a note rather than overwriting history, and flags anything ambiguous for a human instead of guessing."
+metrics:
+  - { label: "Cleaned contacts", value: "96" }
+  - { label: "Cloud services", value: "0" }
+  - { label: "Runs on", value: "One Mac" }
+  - { label: "Backups", value: "Nightly" }
+featured: false
+order: 190
+accent: "#d9c58e"
+---
+
+## Why I built this
+
+Real estate CRMs are priced per seat for teams and sold on features a solo agent will never open. The data underneath is usually a decade of imported contacts nobody has ever cleaned. Before paying anyone a monthly fee it was worth finding out what the data actually looked like, and the fastest way to find out was to build the thing.
+
+## How it works
+
+- **Local first, entirely.** It runs on one Mac on localhost. No cloud service holds the contact list, because the contact list is the business.
+- **Contacts cleaned, not imported.** Duplicates merged, households reconstructed, married-name changes preserved as notes on the record rather than overwriting what was there.
+- **Ambiguity is flagged, never resolved silently.** Anything the cleanup could not settle gets a `VERIFY:` marker for a human. A CRM that quietly guesses which two records are the same person is worse than one that asks.
+- **Nightly backups** to a logged location, because a local-first tool with no backup story is just data waiting to be lost.
+
+## What it took
+
+Less code than judgment. The build is a Node server, SQLite and plain JavaScript, and it was finished quickly. The real work was the cleanup pass and the decision, made early and kept, that the tool would never overwrite a fact it was not sure about.
+
+It is currently a live question whether this stays the system of record or becomes the migration source into a commercial platform. Either way the 96 cleaned records are the asset, and they are clean because a human looked at the ambiguous ones.
+
+## What I learned
+
+Building the throwaway version first was the right call. It answered the question the vendor demo could not, which was what this specific business's data actually needed, and it cost a weekend rather than a year of subscription.

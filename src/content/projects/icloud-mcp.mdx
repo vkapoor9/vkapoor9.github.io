@@ -1,0 +1,47 @@
+---
+title: "iCloud MCP"
+tagline: "A self-built MCP server that gives an AI assistant gated access to mail, calendar and contacts. 285 tests, 33 tools, in daily use."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Python"
+  - "Model Context Protocol"
+  - "IMAP / SMTP"
+  - "CalDAV"
+  - "CardDAV"
+  - "macOS Keychain"
+  - "launchd"
+  - "pytest"
+aiAngle: "The interesting problem in giving a model access to a live mailbox is not retrieval, it is authority. Reads are open, sends are gated, and the gate is enforced in code rather than in a system prompt, because a prompt is a suggestion and a config flag is not."
+metrics:
+  - { label: "Tests", value: "285" }
+  - { label: "Tools exposed", value: "33" }
+  - { label: "Accounts", value: "2" }
+  - { label: "Deployment", value: "2 Macs" }
+featured: true
+order: 40
+accent: "#7ec8a9"
+---
+
+## Why I built this
+
+An assistant that cannot see your inbox is guessing about your day. The existing options wanted either a cloud relay holding a copy of everything, or a token with full account access and no notion of what it was allowed to do with it. Neither is acceptable for a personal mailbox, so I wrote the server.
+
+## How it works
+
+- **33 tools** across mail (18), calendar (6) and contacts (3), plus triage and status utilities.
+- **Read freely, send under a gate.** Sending is a per-account capability that can be switched off in config, so the restriction is structural rather than advisory.
+- **Morning brief and de-noise.** Rules-driven triage plus automated unsubscribe, so the signal in a mailbox is reachable without reading all of it.
+- **Two accounts, separately credentialed.** Credentials live in the macOS Keychain under per-account service names. Never in a dotfile, never in the repo.
+
+## What it took
+
+Zero third-party git code. I read two open-source servers for their ideas on security and triage and then wrote the implementation, because a supply-chain risk in the thing holding your mail credentials is not a tradeoff worth making.
+
+The test suite is 285 cases, and the number that matters more is the verification baseline written into the project docs: expected folder count, contact count, calendar count per account. When a tool returns an empty list, the baseline is what distinguishes "nothing matched" from "the connection silently broke", which is a distinction no exception will make for you.
+
+## What I learned
+
+Building the integration was a week. Deciding what the assistant should be allowed to do, and then enforcing it somewhere a model cannot talk its way past, was the actual project.

@@ -1,5 +1,9 @@
 ---
 import { site } from '../lib/site';
+import { getCollection } from 'astro:content';
+
+// Derived so the hero can never drift from the actual roster again.
+const projectCount = (await getCollection('projects')).length;
 ---
 
 <section class="relative overflow-hidden">
@@ -53,7 +57,7 @@ AWS-certified Solutions Architect with 20+ years across government and enterpris
 
       <div class="reveal flex flex-wrap gap-x-8 gap-y-3 text-[13px] text-[var(--color-ink-dim)] font-mono">
         <span><strong class="text-[var(--color-ink)] font-normal">$760K/yr</strong> cloud cost savings</span>
-        <span><strong class="text-[var(--color-ink)] font-normal">19</strong> projects built</span>
+        <span><strong class="text-[var(--color-ink)] font-normal">{projectCount}</strong> projects documented</span>
         <span><strong class="text-[var(--color-ink)] font-normal">2</strong> live SaaS products</span>
         <span><strong class="text-[var(--color-ink)] font-normal">8</strong> specialized AI agents</span>
         <span><strong class="text-[var(--color-ink)] font-normal">2</strong> production websites live</span>

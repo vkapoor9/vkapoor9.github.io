@@ -1,0 +1,47 @@
+---
+title: "Realtor Buddy"
+tagline: "A voice-first field app for agents who work from the driver's seat. Native Swift, 446 tests, CarPlay-bound."
+category: "Mobile"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Beta"
+stack:
+  - "Swift 6"
+  - "SwiftUI"
+  - "XcodeGen"
+  - "Supabase"
+  - "AVAudioRecorder"
+  - "CoreLocation"
+  - "swift-testing"
+  - "TestFlight"
+aiAngle: "Voice capture is the input method, not a feature bolted on top. Spoken notes after a showing become structured records (property, contact, mileage, follow-up) without the agent ever opening a form, which is the only interaction model that survives a day spent driving."
+metrics:
+  - { label: "Tests", value: "446" }
+  - { label: "TestFlight builds", value: "13" }
+  - { label: "Logic coverage", value: "Headless" }
+  - { label: "CarPlay", value: "Entitlement filed" }
+featured: true
+order: 20
+accent: "#6e93d9"
+---
+
+## Why I built this
+
+Real estate agents spend their working day in a car between showings. Every CRM built for them assumes a desk, a keyboard, and a quiet moment. There is no quiet moment. The notes that matter get taken at 40mph or not at all, and "not at all" is what usually happens.
+
+## How it works
+
+- **Voice first, forms never.** Speak after a showing and the app writes the record: which property, which client, what happened, what is next.
+- **Mileage that logs itself.** Trip detection plus an IRS rate table turns the drive into a deductible line item without anyone remembering to press start.
+- **Offline by default.** A durable outbox queues every capture. The car park with no signal is the normal case, not the edge case.
+- **Drafts for everything.** No capture is ever lost to a failed network call or a backgrounded app.
+
+## What it took
+
+The architecture exists to keep the logic testable. `RBKit` holds pure logic with no device APIs at all: geo math, the rate table, trip detection. It runs headless under `swift test` in 48 tests. `RBData` holds config, DTOs, domain models, repositories, the outbox, auth and the Supabase client across 398 tests. The device layers (`AVAudioRecorder`, `CoreLocation`) live in the app target only, never in the packages, which is the single decision that keeps 446 tests runnable without a simulator.
+
+The rewrite from React Native to native Swift was driven entirely by CarPlay. The frozen RN app stays in the repo as the specification: when a native screen's intent is unclear, the old screen is the answer.
+
+## What I learned
+
+Writing for a user who cannot look at the screen changes every design decision downstream. It also forces an honesty most side projects avoid: if the feature needs a tap to work, in this context it does not work. Thirteen TestFlight builds in, the hardest remaining problem is not engineering. It is that shipping to one real user and watching a full working week is worth more than the next ten features.
