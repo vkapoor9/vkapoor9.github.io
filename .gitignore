@@ -45,3 +45,6 @@ VK Kapoor - Combined Resume*.pdf
 
 # Session handoff docs (business notes, employer/brand refs, PII)
 _handoff-*/
+
+# Claude session archive + lessons (local-only, same reasons as CLAUDE.md)
+docs/claude/
