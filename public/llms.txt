@@ -1,6 +1,6 @@
 # VK - Applied AI Solutions Architect
 
-> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional), AWS Security Specialty. 27 documented projects across SaaS, AI agents, native macOS and iOS apps, developer tools, dashboards, educational AI, and games.
+> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional), AWS Security Specialty. 26 documented projects across SaaS, AI agents, native macOS and iOS apps, developer tools, dashboards, educational AI, and games.
 
 ## Featured projects
 
@@ -8,7 +8,6 @@
 - [Realtor Buddy](/projects/realtor-buddy): A voice-first field app for agents who work from the driver's seat. Native Swift, 446 tests, CarPlay-bound. Status: Beta.
 - [PostyPop](/projects/postypop): One piece of content → 22 platform-tuned variations in seconds. Live SaaS, real customers. Status: Live.
 - [iCloud MCP](/projects/icloud-mcp): A self-built MCP server that gives an AI assistant gated access to mail, calendar and contacts. 285 tests, 33 tools, in daily use. Status: Live.
-- [VoicyNotesAI](/projects/voicy-notes): A macOS notepad for back-to-back meetings. Captures the room, transcribes on-device, writes the clean version. Status: Shipped.
 - [KidsAI Buddy](/projects/kidsai-buddy): Kid-safe AI tutor used daily by seven kids, fully local inference, fully local TTS. Status: Live.
 - [Lead Engine](/projects/lead-engine): End-to-end lead pipeline: prospect, audit, generate a preview redesign, send a personalized cold email, track every open and click. Status: Live.
 - [Prerna Kapoor, Colorado Realtor](/projects/prerna-kapoor): Full website plus a self-running AI content and listings pipeline for a working real-estate practice. Status: Live.
