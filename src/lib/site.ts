@@ -6,7 +6,7 @@ export const site = {
   initials: 'VK',
   role: 'Applied AI Solutions Architect · AWS-Certified Solutions Architect (Professional)',
   tagline:
-    'Applied AI Solutions Architect, AWS Certified at the Professional level. 20+ years architecting secure, scalable cloud, now building AI products end-to-end.',
+    'Applied AI Solutions Architect, AWS Certified at the Professional level. 21+ years architecting secure, scalable cloud, now building AI products end-to-end.',
   bio: [
     'I build AI products. Privacy-first agents, kid-safe educational AI, production SaaS with real customers, on-device voice, every piece shipped, every piece used.',
     'I work end-to-end: model architecture and safety guardrails through to payments, OAuth, observability, and the unglamorous middle layer that decides whether a real customer stays. The work on this site spans local LLMs on Apple Silicon, multi-agent systems with row-level ACLs, and production websites that real businesses rely on.',
@@ -49,7 +49,7 @@ export const certifications = [
 
 export const cloud = {
   summary:
-    "Before the AI work, and right alongside it, I've spent 20+ years as a cloud and solutions architect: leading large on-premises-to-AWS migrations for government and enterprise, designing to the AWS Well-Architected Framework, and owning security and cost from day one.",
+    "Before the AI work, and right alongside it, I've spent 21+ years as a cloud and solutions architect: leading large on-premises-to-AWS migrations for government and enterprise, designing to the AWS Well-Architected Framework, and owning security and cost from day one.",
   highlights: [
     {
       title: 'Government cloud migrations at scale',
