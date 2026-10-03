@@ -17,7 +17,7 @@ stack:
   - "JWT (RS256)"
   - "launchd"
   - "pytest"
-aiAngle: "The interesting problem in giving a model access to a live mailbox is not retrieval, it is authority. The model reading strangers' email is the same model calling the tools, so the defence has to be architectural: a tool that should not be reachable is not registered at all, and the model may spend trust but never grant it."
+aiAngle: "The interesting problem in giving a model access to a live mailbox is not retrieval, it is authority. The model reading strangers' email is the same model calling the tools, so the defence has to be architectural: a tool that should not be reachable is not registered at all. The model can spend trust it was given; approving someone new takes an explicit confirmation step, and because the model makes that call on the phone, new recipients get a daily cap of their own."
 repoUrl: "https://github.com/vkapoor9/moofmail"
 metrics:
   - { label: "Tests", value: "443" }
@@ -49,7 +49,7 @@ The name is a small tribute: "Moof!" is what Clarus the dogcow says, the pixel a
 
 ## From a phone, by voice
 
-New since this page was first written: I can talk to it from my phone, including through Claude's voice mode. The server still runs on my own Mac. A remote MCP connector reaches it through an outbound-only Cloudflare Tunnel, behind Cloudflare Access with managed OAuth, and the server binds to localhost only, so nothing on the machine listens to the internet.
+I can talk to it from my phone, including through Claude's voice mode. The server still runs on my own Mac. A remote MCP connector reaches it through an outbound-only Cloudflare Tunnel, behind Cloudflare Access with managed OAuth, and the server binds to localhost only, so nothing on the machine listens to the internet.
 
 There are two independent locks. Access enforces its policy at the edge, and then the server re-verifies the signed token itself: RS256 only, audience, issuer, and an email allowlist pinned in its own config. A dashboard edit on its own cannot widen who gets in.
 
@@ -75,4 +75,4 @@ The full system carries 443 tests. The public plugin carries 349 of them, becaus
 
 Building the integration was a week. Deciding what the assistant should be allowed to do, and then enforcing it somewhere a model cannot talk its way past, was the actual project.
 
-The phone connector sharpened that into one rule: remove the capability, don't scan the content. Every tool that reads email is reading text written by strangers, and no filter reliably tells an instruction from a message. So the model may spend trust, never grant it. It can send to someone already approved. Anyone new takes an explicit confirmation step and counts against its own daily cap, and nothing the model can call will reset the approved list or reach a tool that was never registered. Prompt-injection defence turned out to be an architecture decision, not a prompt.
+The phone connector sharpened that into one rule: remove the capability, don't scan the content. Every tool that reads email is reading text written by strangers, and no filter reliably tells an instruction from a message. So the model can spend trust it was given. It sends to people already approved; approving someone new takes an explicit confirmation step that the model makes on the phone, which is why new recipients count against a daily cap of their own, and nothing the model can call will reset the approved list or reach a tool that was never registered. Prompt-injection defence turned out to be an architecture decision, not a prompt.
