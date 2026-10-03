@@ -1,0 +1,78 @@
+---
+title: "Moofmail"
+tagline: "Private iCloud mail, calendar and contacts for Claude Code, now reachable from a phone by voice. 33 tools, 443 tests, open source under MIT."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Live"
+stack:
+  - "Python"
+  - "Model Context Protocol"
+  - "Claude Code plugin"
+  - "IMAP / SMTP"
+  - "CalDAV"
+  - "CardDAV"
+  - "Cloudflare Tunnel"
+  - "Cloudflare Access (OAuth)"
+  - "JWT (RS256)"
+  - "launchd"
+  - "pytest"
+aiAngle: "The interesting problem in giving a model access to a live mailbox is not retrieval, it is authority. The model reading strangers' email is the same model calling the tools, so the defence has to be architectural: a tool that should not be reachable is not registered at all, and the model may spend trust but never grant it."
+repoUrl: "https://github.com/vkapoor9/moofmail"
+metrics:
+  - { label: "Tests", value: "443" }
+  - { label: "Tools exposed", value: "33" }
+  - { label: "Phone default", value: "19 tools" }
+  - { label: "Deployment", value: "2 Macs" }
+featured: true
+order: 40
+accent: "#7ec8a9"
+---
+
+## Why I built this
+
+An assistant that cannot see your inbox is guessing about your day. The existing options wanted either a cloud relay holding a copy of everything, or a token with full account access and no notion of what it was allowed to do with it. Neither is acceptable for a personal mailbox, so I wrote the server.
+
+## What it is now
+
+Moofmail is the public release: an MIT-licensed plugin for Claude Code that lets Claude read, triage and act on iCloud mail, calendar and contacts. It runs on your own computer and talks straight to Apple's servers over IMAP, SMTP, CalDAV and CardDAV, using an app-specific password you can revoke at any time. No hosted service in the middle, no account to sign up for, no telemetry.
+
+The name is a small tribute: "Moof!" is what Clarus the dogcow says, the pixel animal from the classic Mac OS Page Setup dialog. Moofmail is an independent project for iCloud users and is not affiliated with or endorsed by Apple.
+
+## How it works
+
+- **33 tools** across mail, inbox cleanup, calendar and contacts.
+- **Reads are invisible.** Messages are fetched without marking anything read.
+- **Sending is off until you turn it on.** When it is on, anyone new needs an explicit confirmation before they get an email, and delete only ever means move to Trash.
+- **Morning brief and de-noise.** Rules-driven triage plus preview-first cleanup, so the signal in a mailbox is reachable without reading all of it.
+- **Two accounts, separately credentialed.** Credentials live in the operating system's credential store. Never in a dotfile, never in the repo.
+
+## From a phone, by voice
+
+New since this page was first written: I can talk to it from my phone, including through Claude's voice mode. The server still runs on my own Mac. A remote MCP connector reaches it through an outbound-only Cloudflare Tunnel, behind Cloudflare Access with managed OAuth, and the server binds to localhost only, so nothing on the machine listens to the internet.
+
+There are two independent locks. Access enforces its policy at the edge, and then the server re-verifies the signed token itself: RS256 only, audience, issuer, and an email allowlist pinned in its own config. A dashboard edit on its own cannot widen who gets in.
+
+## Safety by capability, not by prompt
+
+The phone path is a separate server built from an explicit allowlist, not the local toolset with a warning attached.
+
+- **Default profile: 19 tools.** Everything that reads, plus creating calendar events that invite nobody.
+- **An opt-in write profile** adds organizing mail, trash (recoverable), and editing events that have no attendees. Send and reply go straight out to people in Contacts or already approved; anyone new needs explicit confirmation.
+- **No attachments over the phone path.** An attachment is a way for a prompt to read files off the machine.
+- **Daily caps** on sends, new recipients and trash. A person never reaches them and an injected loop would reach them in seconds, so they work as a tripwire.
+- **Every phone write lands in an audit log**, summarized in the next morning brief.
+- **Absent in every profile:** deleting events, mail rules, bulk trash, unsubscribe-by-email and resetting approvals. Not gated. Not there.
+- **iCloud Notes are blocked on every surface**, because Apple stores older Notes as mail folders and a mail tool would otherwise walk straight into them.
+
+## What it took
+
+Zero third-party git code. I read two open-source servers for their ideas on security and triage and then wrote the implementation, because a supply-chain risk in the thing holding your mail credentials is not a tradeoff worth making.
+
+The full system carries 443 tests. The public plugin carries 349 of them, because the phone connector is not in the public build yet. The number that matters more is the verification baseline written into the project docs: expected folder count, contact count, calendar count per account. When a tool returns an empty list, the baseline is what distinguishes "nothing matched" from "the connection silently broke", which is a distinction no exception will make for you.
+
+## What I learned
+
+Building the integration was a week. Deciding what the assistant should be allowed to do, and then enforcing it somewhere a model cannot talk its way past, was the actual project.
+
+The phone connector sharpened that into one rule: remove the capability, don't scan the content. Every tool that reads email is reading text written by strangers, and no filter reliably tells an instruction from a message. So the model may spend trust, never grant it. It can send to someone already approved. Anyone new takes an explicit confirmation step and counts against its own daily cap, and nothing the model can call will reset the approved list or reach a tool that was never registered. Prompt-injection defence turned out to be an architecture decision, not a prompt.
