@@ -20,6 +20,7 @@
 - [AI Visibility Audit](/projects/ai-visibility-audit): Measures whether AI assistants recommend a business, or its competitors. Zero runtime dependencies, sellable report out the other end. Status: Shipped.
 - [Video Pipeline](/projects/video-pipeline): Drop raw footage in a folder. Get a cut, graded, captioned, encoded film out, stopping once for a human yes. Status: Beta.
 - [LocalLLM Fit](/projects/local-llm-fit): Tells you which local model your machine can actually run, and shows the memory arithmetic instead of asserting it. Status: Live.
+- [AutoMDConvert](/projects/auto-md-convert): Drag an email out of Outlook into a folder and your AI agent can read it seconds later. Open source under MIT. Status: Shipped.
 - [Expense Tracker](/projects/expense-tracker): A mobile-first PWA my mother uses every day in India. Status: Live.
 - [Jarvis V5](/projects/jarvis-v5): A privacy-first family AI agent that runs on my own hardware. Status: Live.
 - [Local-Service AI Suite](/projects/local-service-ai): Three tools that recover revenue for local service businesses: catch the lead, manage the reputation, revive the database. Status: Prototype.

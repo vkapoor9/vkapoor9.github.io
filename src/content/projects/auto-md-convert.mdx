@@ -1,0 +1,43 @@
+---
+title: "AutoMDConvert"
+tagline: "Drag an email out of Outlook into a folder and your AI agent can read it seconds later. Open source under MIT."
+category: "Tool"
+role: "Architect & sole engineer"
+year: "2026"
+status: "Shipped"
+stack:
+  - "Python"
+  - "launchd"
+  - "Finder Quick Actions"
+  - "macOS textutil"
+  - "MarkItDown"
+  - "unittest"
+aiAngle: "An agent is only as good as the context it can reach, and a lot of real project context lives in email. This keeps sharing deliberate: a person picks one message and drags it in, and the agent reads a clean file, with no access to the mailbox itself. The README tells users to treat the converted text as untrusted input, because other people wrote it."
+repoUrl: "https://github.com/vkapoor9/auto-md-convert"
+metrics:
+  - { label: "Tests", value: "87" }
+  - { label: "File types", value: "16" }
+  - { label: "Default scan", value: "2s" }
+  - { label: "License", value: "MIT" }
+featured: false
+order: 145
+accent: "#8eb4d9"
+---
+
+## Why I built this
+
+My coding agent kept missing context that only existed in email threads. I wanted one gesture to fix that: drag the message out of Outlook, drop it in the project's folder, and the agent has it.
+
+## How it works
+
+- **You choose the folders.** A background watcher starts at login and converts files only in folders you enable. Anything dropped elsewhere stays untouched.
+- **One Markdown file per email.** Subject, sender, recipients and date go in YAML front matter, followed by the body and every attachment, converted inline.
+- **Not just email.** Word, PowerPoint, Excel, PDF, HTML, RTF, CSV and EPUB go through the same drop, and a Finder Quick Action converts a file anywhere on demand.
+- **Originals are kept.** The source moves to an archive folder next to the Markdown, so nothing is lost.
+- **No mail access and no plugins.** The unit of input is a file you drag out of an app, so it doesn't need to script Outlook or log in to anything.
+
+## What made it harder than it looks
+
+A file watcher is easy until the files are real. A file can still be changing while it's read, so those wait for a later scan. Name collisions get a numeric suffix rather than overwriting, including repeat drops of the same email. Complete output is published atomically where the filesystem supports it, and failed conversions keep the source and retry.
+
+Email is its own rabbit hole. Attached emails are converted recursively, up to ten levels, with a visible notice at the limit. An attachment that can't be converted still appears with its name, its size and a notice, and the rest of the message carries on.
