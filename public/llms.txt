@@ -1,11 +1,10 @@
 # VK - Applied AI Solutions Architect
 
-> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional), AWS Security Specialty. 27 documented projects across SaaS, AI agents, native macOS and iOS apps, developer tools, dashboards, educational AI, and games.
+> Portfolio for Applied AI Solutions Architecture, Cloud Architecture, and Engineering leadership roles. AWS Certified Solutions Architect (Professional), AWS Security Specialty. 26 documented projects across SaaS, AI agents, native macOS and iOS apps, developer tools, dashboards, educational AI, and games.
 
 ## Featured projects
 
 - [Jarvis Mac](/projects/jarvis-mac): A fully local voice assistant on Apple Silicon, streaming pipeline, speculative decoding, on-device RAG. Status: Live.
-- [Realtor Buddy](/projects/realtor-buddy): A voice-first field app for agents who work from the driver's seat. Native Swift, 446 tests, CarPlay-bound. Status: Beta.
 - [PostyPop](/projects/postypop): One piece of content → 22 platform-tuned variations in seconds. Live SaaS, real customers. Status: Live.
 - [Moofmail](/projects/moofmail): Private iCloud mail, calendar and contacts for Claude Code, now reachable from a phone by voice. 33 tools, 443 tests, open source under MIT. Status: Live.
 - [KidsAI Buddy](/projects/kidsai-buddy): Kid-safe AI tutor used daily by seven kids, fully local inference, fully local TTS. Status: Live.
